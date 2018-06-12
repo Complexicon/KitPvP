@@ -1,0 +1,7 @@
+name: KitPvP
+main: tk.complexicon.kitpvp.Main
+version: 1.0-Dev
+commands:
+   reloadkits:
+      description: Reloads Kits.
+      usage: /reloadkits
