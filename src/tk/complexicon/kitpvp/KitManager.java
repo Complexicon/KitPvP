@@ -40,6 +40,7 @@ class KitManager {
         berserk();
         ender();
         soup();
+        luca();
         templar();
         mage();
         ghost();
@@ -520,6 +521,33 @@ class KitManager {
 
         k.hotbar[1] = new CPotion(PotionType.INSTANT_HEAL, 2, false, false).toStack().setName("&dHimbeersaft").finish();
         k.hotbar[2] = new CItemStack(Material.GOLDEN_APPLE).makeUnbreakable().setName("&6Karamellapfel").finish();
+
+        addKit(k);
+    }
+
+    private void luca() {
+        Kit k = new Kit();
+
+        String[] lore = new String[]{
+                "Rotzball",
+                "Rotztop",
+                "Rotztrank"
+        };
+
+        k.displayItem = new CItemStack(Material.SLIME_BALL).addLore(lore).setName("&2Rotzi").finish();
+
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.GREEN).setName("&2Rotz-Top").addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 8).finish();
+
+        k.hotbar[0] = new CItemStack(Material.SLIME_BALL)
+                .setName("&2Popel der Schleimigkeit")
+                .addEnchantment(Enchantment.DAMAGE_ALL, 8)
+                .finish();
+
+        k.hotbar[1] = new CPotion(PotionType.REGEN, 2, false, true).toStack().setName("&2Schleimbrühe").finish();
+
+        k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+
+        k.permission = "kitpvp.donator";
 
         addKit(k);
     }
