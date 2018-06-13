@@ -537,16 +537,16 @@ class KitManager {
 
         k.displayItem = new CItemStack(Material.SLIME_BALL).addLore(lore).setName("&2Rotzi").finish();
 
-        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.GREEN).setName("&2Rotz-Top").addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 8).finish();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.GREEN).setName("&2Rotz-Top").addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4).finish();
 
-        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GREEN).setName("&2Verrotzte-Weiße-AirMax").addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3).finish();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GREEN).setName("&2Verrotzte-Weiße-AirMax").addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).finish();
 
         k.hotbar[0] = new CItemStack(Material.SLIME_BALL)
                 .setName("&2Popel der Schleimigkeit")
-                .addEnchantment(Enchantment.DAMAGE_ALL, 8)
+                .addEnchantment(Enchantment.DAMAGE_ALL, 6)
                 .finish();
 
-        k.hotbar[1] = new CPotion(PotionType.REGEN, 2, false, true).toStack(3).setName("&2Schleimbrühe").finish();
+        k.hotbar[1] = new CPotion(PotionType.REGEN, 1, false, true).toStack(2).setName("&2Schleimbrühe").finish();
 
         k.permission = "kitpvp.donator";
 
