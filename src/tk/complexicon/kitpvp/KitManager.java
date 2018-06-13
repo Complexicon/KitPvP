@@ -555,4 +555,6 @@ class KitManager {
         addKit(k);
     }
 
+    //Cock
+    
 }
