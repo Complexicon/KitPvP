@@ -534,7 +534,7 @@ class KitManager {
                 "&2- Rotzball",
                 "&2- Rotztop",
                 "&2- Rotzboots",
-                "&2- Rotztrank"
+                "&2- Schleimbrühe"
         };
 
         k.displayItem = new CItemStack(Material.SLIME_BALL).addLore(lore).setName("&2Rotzi").finish();
