@@ -529,10 +529,12 @@ class KitManager {
         Kit k = new Kit();
 
         String[] lore = new String[]{
-                "Rotzball",
-                "Rotztop",
-                "Rotzboots",
-                "Rotztrank"
+                "&3Dies ist ein Kit für Donator",
+                "&6Dieses Kit beinhaltet:",
+                "&2- Rotzball",
+                "&2- Rotztop",
+                "&2- Rotzboots",
+                "&2- Rotztrank"
         };
 
         k.displayItem = new CItemStack(Material.SLIME_BALL).addLore(lore).setName("&2Rotzi").finish();
