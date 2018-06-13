@@ -251,7 +251,7 @@ class KitManager {
         k.boots = new CItemStack(Material.IRON_BOOTS).addEnchantment(Enchantment.PROTECTION_FALL, 10).makeUnbreakable().finish();
 
         k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().finish();
-        k.hotbar[1] = new CItemStack(Material.ENDER_PEARL, 8).finish();
+        k.hotbar[1] = new CItemStack(Material.ENDER_PEARL, 16).finish();
         k.hotbar[8] = new CItemStack(Material.GOLDEN_APPLE, 2).finish();
 
         k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
@@ -555,6 +555,4 @@ class KitManager {
         addKit(k);
     }
 
-    //Cock
-    
 }
