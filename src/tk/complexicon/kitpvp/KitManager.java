@@ -27,6 +27,7 @@ class KitManager {
         kitlist = new ArrayList();
 
         swordsman();
+        keks();
         archer();
         pyro();
         tank();
@@ -40,7 +41,6 @@ class KitManager {
         berserk();
         ender();
         soup();
-        luca();
         templar();
         mage();
         ghost();
@@ -525,34 +525,28 @@ class KitManager {
         addKit(k);
     }
 
-    private void luca() {
+    private void keks() {
         Kit k = new Kit();
 
         String[] lore = new String[]{
-                "&3Dies ist ein Kit für Donator",
                 "&6Dieses Kit beinhaltet:",
-                "&2- Rotzball",
-                "&2- Rotztop",
-                "&2- Rotzboots",
-                "&2- Schleimbrühe"
+                "&2- Steinaxt",
+                "&2- Stärketrank",
+                "&2- Eisenhelm",
+                "&2- Kettenbrust",
+                "&2- Lederhose",
+                "&2- Lederschuhe"
         };
 
-        k.displayItem = new CItemStack(Material.SLIME_BALL).addLore(lore).setName("&2Rotzi").finish();
+        k.displayItem = new CItemStack(Material.STONE_AXE).addLore(lore).setName("&eBarbar").finish();
+        k.helm = new CItemStack(Material.IRON_HELMET).makeUnbreakable().finish();
+        k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().finish();
+        k.legs = new CItemStack(Material.LEATHER_LEGGINGS).makeUnbreakable().finish();
+        k.boots = new CItemStack(Material.LEATHER_BOOTS).makeUnbreakable().finish();
+        k.hotbar[0] = new CItemStack(Material.STONE_AXE).makeUnbreakable().finish();
+        k.hotbar[1] = new CPotion(PotionType.STRENGTH, 1, false, false).toStack().finish();
 
-        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.GREEN).setName("&2Rotz-Top").addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4).finish();
-
-        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GREEN).setName("&2Verrotzte-Weiße-AirMax").addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).finish();
-
-        k.hotbar[0] = new CItemStack(Material.SLIME_BALL)
-                .setName("&2Popel der Schleimigkeit")
-                .addEnchantment(Enchantment.DAMAGE_ALL, 6)
-                .finish();
-
-        k.hotbar[1] = new CPotion(PotionType.REGEN, 1, false, true).toStack(2).setName("&2Schleimbrühe").finish();
-
-        k.permission = "kitpvp.donator";
 
         addKit(k);
     }
-
 }
