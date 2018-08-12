@@ -1,5 +1,6 @@
 package tk.complexicon.kitpvp;
 
+import com.nametagedit.plugin.NametagEdit;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.*;
@@ -20,10 +21,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -166,6 +164,32 @@ public class Events implements Listener {
     }
 
     @EventHandler
+    public void onLeave(PlayerQuitEvent e){
+
+        Player p = e.getPlayer();
+
+        for (PotionEffect effect : p.getActivePotionEffects()){
+            p.removePotionEffect(effect.getType());
+        }
+
+        m.invisible.removeEntry(p.getDisplayName());
+
+    }
+
+    @EventHandler
+    public void onKick(PlayerKickEvent e){
+
+        Player p = e.getPlayer();
+
+        for (PotionEffect effect : p.getActivePotionEffects()){
+            p.removePotionEffect(effect.getType());
+        }
+
+        m.invisible.removeEntry(p.getDisplayName());
+
+    }
+
+    @EventHandler
     public void onKitSelect(InventoryClickEvent e) {
 
         Player p = (Player) e.getWhoClicked();
@@ -202,6 +226,15 @@ public class Events implements Listener {
 
                         pi.clear();
 
+                        if(m.invisible.hasEntry(p.getDisplayName())){
+                            m.invisible.removeEntry(p.getDisplayName());
+
+                            if(m.nteHook){
+                                NametagEdit.getApi().clearNametag(p);
+                                NametagEdit.getApi().reloadNametag(p);
+                            }
+                        }
+
                         for (PotionEffect effect : p.getActivePotionEffects()){
                             p.removePotionEffect(effect.getType());
                         }
@@ -213,6 +246,9 @@ public class Events implements Listener {
                         if(!k.effects.isEmpty()){
                             for(PotionEffect eff: k.effects){
                                 p.addPotionEffect(eff);
+                                if(eff.getType() == PotionEffectType.INVISIBILITY){
+                                    m.invisible.addEntry(p.getDisplayName());
+                                }
                             }
                         }
 
@@ -268,6 +304,15 @@ public class Events implements Listener {
         e.getPlayer().getInventory().clear();
         e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
         e.getPlayer().teleport(e.getPlayer().getWorld().getSpawnLocation());
+
+        Bukkit.getScheduler().runTaskLater(m, new Runnable() {
+            @Override
+            public void run() {
+                e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+                e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+            }
+        }, 5);
+
     }
 
     @EventHandler
@@ -303,6 +348,14 @@ public class Events implements Listener {
         e.setDeathMessage(ChatColor.DARK_RED + death.getDisplayName() + "§c ist gestorben.");
 
         cooldown.remove(death);
+
+        if(m.invisible.hasEntry(death.getDisplayName())){
+            m.invisible.removeEntry(death.getDisplayName());
+            if(m.nteHook){
+                NametagEdit.getApi().clearNametag(death);
+                NametagEdit.getApi().reloadNametag(death);
+            }
+        }
 
         Bukkit.getScheduler().runTaskLater(m, new Runnable() {
 
