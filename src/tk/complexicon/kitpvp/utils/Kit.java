@@ -13,6 +13,9 @@ public class Kit {
     
     public String permission = "kitpvp.default";
 
+    public boolean buyable = true;
+    public int price = 0;
+
     public ItemStack displayItem = new CItemStack(Material.BARRIER).setName("§aDEFAULT").finish();
 
     public ItemStack helm = air;

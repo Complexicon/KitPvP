@@ -24,6 +24,11 @@ public class CItemStack {
         this.meta = i.getItemMeta();
     }
 
+    public CItemStack(Material m, ItemMeta meta){
+        this.i = new ItemStack(m);
+        this.meta = meta;
+    }
+
     public CItemStack(Material m, int amount){
         this.i = new ItemStack(m, amount);
         this.meta = i.getItemMeta();
@@ -54,6 +59,10 @@ public class CItemStack {
 
         meta.setLore(loreList);
         return applyMeta();
+    }
+
+    public List<String> getLore(){
+        return meta.getLore();
     }
 
     public ItemStack finish(){

@@ -1,12 +1,14 @@
 package tk.complexicon.kitpvp;
 
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.*;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -15,6 +17,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -27,10 +30,13 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import tk.complexicon.kitpvp.utils.CItemStack;
 import tk.complexicon.kitpvp.utils.CLeatherArmor;
 import tk.complexicon.kitpvp.utils.Kit;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class Events implements Listener {
@@ -93,7 +99,36 @@ public class Events implements Listener {
                 Player p = e.getPlayer();
                 Sign s = (Sign) e.getClickedBlock().getState();
                 if (s.getLine(0).contains("§c-§bKitPvP§c-")) {
-                    p.openInventory(m.km.kits);
+                    int multiplier = (int) Math.ceil(m.km.kitlist.size() / 9.0);
+
+                    Inventory dummy = Bukkit.createInventory(null, 9 * multiplier, ChatColor.LIGHT_PURPLE + "Kits");
+                    int x = 0;
+                    for (Kit k : m.km.kitlist) {
+
+                        CItemStack displayItem = new CItemStack(k.displayItem.getType(), k.displayItem.getItemMeta());
+                        List<String> curLore = displayItem.getLore();
+                        List<String> statusLore = new ArrayList();
+
+                        if(p.hasPermission(k.permission)){
+                            statusLore.add(ChatColor.GREEN + "Bereits Gekauft!");
+                        }else{
+                            if(k.buyable){
+                                statusLore.add(ChatColor.RED + "Nicht Gekauft!");
+                                statusLore.add(ChatColor.GOLD + "Preis: " + k.price);
+                                statusLore.add(ChatColor.AQUA + "Kaufe mit Rechtsklick!");
+                            }else{
+                                statusLore.add(ChatColor.RED + "Nicht Kaufbar!");
+                                statusLore.add(ChatColor.LIGHT_PURPLE + "Exklusiv Für VIP!");
+                            }
+                        }
+
+                        curLore.addAll(0, statusLore);
+
+                        dummy.setItem(x, displayItem.addLore(curLore.toArray(new String[0])).finish());
+                        x++;
+                    }
+
+                    p.openInventory(dummy);
                 }
             }
         }
@@ -114,16 +149,18 @@ public class Events implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onSnowball(EntityDamageByEntityEvent e) {
-        if (e.getDamager() instanceof Snowball) {
-            if(((Snowball) e.getDamager()).getShooter() instanceof Player){
-                Player shooter = (Player) ((Snowball) e.getDamager()).getShooter();
-                shooter.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20, 2));
-            }
-            if(e.getEntity() instanceof Player){
-                Player p = (Player) e.getEntity();
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 2));
+        if(!e.isCancelled()){
+            if (e.getDamager() instanceof Snowball) {
+                if(((Snowball) e.getDamager()).getShooter() instanceof Player){
+                    Player shooter = (Player) ((Snowball) e.getDamager()).getShooter();
+                    shooter.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20, 2));
+                }
+                if(e.getEntity() instanceof Player){
+                    Player p = (Player) e.getEntity();
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 2));
+                }
             }
         }
     }
@@ -139,7 +176,7 @@ public class Events implements Listener {
             return;
         }
 
-        if(i.getName() == m.km.kits.getName()){
+        if(i.getName().contains(m.km.kits.getName())){
             e.setCancelled(true);
             for(Kit k : m.km.kitlist){
                 if(c.getItemMeta().getDisplayName() == k.displayItem.getItemMeta().getDisplayName() && c.getType() == k.displayItem.getType()){
@@ -188,6 +225,36 @@ public class Events implements Listener {
                         }
 
                     }else{
+
+                        if(e.getClick() == ClickType.RIGHT){
+                            RegisteredServiceProvider<Economy> rspE = m.getServer().getServicesManager().getRegistration(Economy.class);
+                            Economy econ = rspE.getProvider();
+                            RegisteredServiceProvider<Permission> rspP = m.getServer().getServicesManager().getRegistration(Permission.class);
+                            Permission perms = rspP.getProvider();
+
+                            if(k.buyable){
+                                if(econ.getBalance(p) >= k.price){
+                                    econ.withdrawPlayer(p, k.price);
+                                    perms.playerAdd(p, k.permission);
+                                    p.sendMessage("§aDu hast erfolgreich das Kit: " + c.getItemMeta().getDisplayName() + "§a gekauft. Vielen Dank!");
+                                    p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 0.8F);
+                                    p.closeInventory();
+                                    return;
+                                }else{
+                                    p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1, 1);
+                                    p.sendMessage("§cDu hast nicht genug Geld für das Kit: " + c.getItemMeta().getDisplayName());
+                                    return;
+                                }
+                            }else{
+                                p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1, 1);
+                                p.sendMessage("§cDu kannst diese Kit nicht Kaufen!");
+                                return;
+                            }
+
+
+
+                        }
+
                         p.sendMessage("§cKeine Berechtigung auf das Kit: " + c.getItemMeta().getDisplayName());
                     }
                 }

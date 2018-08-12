@@ -27,23 +27,24 @@ class KitManager {
         kitlist = new ArrayList();
 
         swordsman();
-        keks();
+        barbar();
         archer();
         pyro();
         tank();
+
         snowman();
         rod();
         witch();
         rabbit();
         canada();
         housewife();
-
         berserk();
-        ender();
         soup();
         templar();
         mage();
+
         ghost();
+        ender();
 
         int multiplier = (int) Math.ceil(kitlist.size() / 9.0);
 
@@ -53,6 +54,7 @@ class KitManager {
             kits.setItem(x, k.displayItem);
             x++;
         }
+
     }
 
     private void addKit(Kit k) {
@@ -177,15 +179,15 @@ class KitManager {
     private void berserk() {
         Kit k = new Kit();
 
+        k.permission = "kitpvp.berserk";
+        k.price = 5500;
+
         String[] lore = new String[]{
-                "&3Dies ist ein Kit für Donator",
                 "&6Dieses Kit beinhaltet:",
                 "&2- Eisenschwert",
                 "&2- Lederjacke",
                 "&5- Permanent Stärke 1"
         };
-
-        k.permission = "kitpvp.donator";
 
         k.displayItem = new CItemStack(Material.IRON_SWORD).setName("&4Berserker").addLore(lore).finish();
         k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.RED).makeUnbreakable().finish();
@@ -199,6 +201,9 @@ class KitManager {
 
     private void snowman() {
         Kit k = new Kit();
+
+        k.permission = "kitpvp.snowman";
+        k.price = 5000;
 
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
@@ -228,8 +233,10 @@ class KitManager {
     private void ender() {
         Kit k = new Kit();
 
+        k.permission = "kitpvp.ender";
+        k.buyable = false;
+
         String[] lore = new String[]{
-                "&3Dies ist ein Kit für Donator",
                 "&6Dieses Kit beinhaltet:",
                 "&2- Steinschwert",
                 "&2- Lederhelm",
@@ -240,8 +247,6 @@ class KitManager {
                 "&5- Heilung beim Treffen der Enderperle für Kurze Zeit",
                 "&5- Permanent Geschwindigkeit 1"
         };
-
-        k.permission = "kitpvp.donator";
 
         k.displayItem = new CItemStack(Material.ENDER_PEARL).setName("&3Ender").addLore(lore).finish();
 
@@ -262,16 +267,16 @@ class KitManager {
     private void soup() {
         Kit k = new Kit();
 
+        k.permission = "kitpvp.soup";
+        k.price = 3500;
+
         String[] lore = new String[]{
-                "&3Dies ist ein Kit für Donator",
                 "&6Dieses Kit beinhaltet:",
                 "&2- Steinschwert",
                 "&2- Volle Kettenrüstung",
                 "&2- 8 Zaubersuppen",
                 "&5- Heilung beim nutzen der Suppen"
         };
-
-        k.permission = "kitpvp.donator";
 
         k.displayItem = new CItemStack(Material.MUSHROOM_SOUP).setName("&eSoup").addLore(lore).finish();
 
@@ -288,6 +293,9 @@ class KitManager {
 
     private void rod() {
         Kit k = new Kit();
+
+        k.permission = "kitpvp.rod";
+        k.price = 1250;
 
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
@@ -317,16 +325,16 @@ class KitManager {
     private void templar() {
         Kit k = new Kit();
 
+        k.permission = "kitpvp.templar";
+        k.price = 3750;
+
         String[] lore = new String[]{
-                "&3Dies ist ein Kit für Donator",
                 "&6Dieses Kit beinhaltet:",
                 "&2- Eisenschwert",
                 "&2- Eisenbrustplatte Schutz 1",
                 "&2- 2 Werfbare Heiltränke",
                 "&5- 14 Goldene Extraherzen"
         };
-
-        k.permission = "kitpvp.donator";
 
         k.displayItem = new CItemStack(Material.GOLDEN_APPLE).setName("&6Templer").addLore(lore).finish();
 
@@ -343,8 +351,10 @@ class KitManager {
     private void mage() {
         Kit k = new Kit();
 
+        k.permission = "kitpvp.mage";
+        k.price = 4500;
+
         String[] lore = new String[]{
-                "&3Dies ist ein Kit für Donator",
                 "&6Dieses Kit beinhaltet:",
                 "&2- Holzschwert",
                 "&2- Lederhelm",
@@ -359,8 +369,6 @@ class KitManager {
                 "&2- Geschwindigkeits Trank",
                 "&5- Permanent Nachtsicht"
         };
-
-        k.permission = "kitpvp.donator";
 
         k.displayItem = new CItemStack(Material.POTION).setName("&6Magier").addLore(lore).finish();
 
@@ -387,6 +395,9 @@ class KitManager {
     private void rabbit() {
         Kit k = new Kit();
 
+        k.permission = "kitpvp.rabbit";
+        k.price = 2650;
+
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
                 "&2- Steinschwert",
@@ -404,7 +415,7 @@ class KitManager {
         k.boots = new CItemStack(Material.CHAINMAIL_BOOTS).makeUnbreakable().finish();
 
         k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().finish();
-        k.hotbar[1] = new CPotion(PotionType.INSTANT_HEAL, 1, true, false).toStack().finish();
+        k.hotbar[1] = new CPotion(PotionType.INSTANT_HEAL, 2, true, false).toStack().finish();
 
         k.addEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 1));
         k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
@@ -414,6 +425,9 @@ class KitManager {
 
     private void witch() {
         Kit k = new Kit();
+
+        k.permission = "kitpvp.witch";
+        k.price = 3250;
 
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
@@ -443,6 +457,9 @@ class KitManager {
     private void canada() {
         Kit k = new Kit();
 
+        k.permission = "kitpvp.canada";
+        k.price = 3000;
+
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
                 "&2- Holzfäleraxt",
@@ -467,10 +484,10 @@ class KitManager {
     private void ghost() {
         Kit k = new Kit();
 
-        k.permission = "kitpvp.donator";
+        k.permission = "kitpvp.ghost";
+        k.buyable = false;
 
         String[] lore = new String[]{
-                "&3Dies ist ein Kit für Donator",
                 "&6Dieses Kit beinhaltet:",
                 "&2- Holzchwert",
                 "&2- Werfbarer Heilungstränke",
@@ -491,6 +508,9 @@ class KitManager {
 
     private void housewife() {
         Kit k = new Kit();
+
+        k.permission = "kitpvp.housewife";
+        k.price = 2150;
 
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
@@ -515,7 +535,7 @@ class KitManager {
         k.hotbar[0] = new CItemStack(Material.WOOD_SPADE)
                 .makeUnbreakable()
                 .setName("&cKochlöffel der Verdammnis")
-                .addEnchantment(Enchantment.DAMAGE_ALL, 5)
+                .addEnchantment(Enchantment.DAMAGE_ALL, 4)
                 .addEnchantment(Enchantment.KNOCKBACK, 4)
                 .finish();
 
@@ -525,7 +545,7 @@ class KitManager {
         addKit(k);
     }
 
-    private void keks() {
+    private void barbar() {
         Kit k = new Kit();
 
         String[] lore = new String[]{
