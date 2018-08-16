@@ -379,16 +379,25 @@ public class Events implements Listener {
                 Random r = new Random();
                 RegisteredServiceProvider<Economy> rsp = m.getServer().getServicesManager().getRegistration(Economy.class);
                 Economy econ = rsp.getProvider();
-                int money = 4 + r.nextInt(6);
-                econ.depositPlayer(killer, money);
-                Bukkit.getScheduler().runTaskLater(m, new Runnable() {
+                int base = 4 + r.nextInt(6);
+                int boost = 0;
 
-                    @Override
-                    public void run() {
-                        killer.sendMessage("§aDu hast: " + ChatColor.GOLD + "+" + money + "G §aErhalten!");
-                    }
+                if(killer.hasPermission("kitpvp.coinboost.2x")){
+                    boost = 5 + r.nextInt(5);
+                }
 
-                }, 5L);
+                if(killer.hasPermission("kitpvp.coinboost.4x")){
+                    boost = 15 + r.nextInt(15);
+                }
+
+                if(boost == 0){
+                    econ.depositPlayer(killer, base);
+                    killer.sendMessage("§aDu hast: ©" + ChatColor.GOLD + "+" + base + " §aErhalten!");
+                }else{
+                    econ.depositPlayer(killer, base + boost);
+                    killer.sendMessage("§aDu hast: §6+©" + base + " §aund Boost: §b+©" + boost +" §aErhalten! §6(©+" + (base + boost) + ")");
+                }
+
             }
         } else {
             return;
