@@ -548,10 +548,13 @@ class KitManager {
     private void barbar() {
         Kit k = new Kit();
 
+        k.permission = "kitpvp.barbar";
+        k.price = 2600;
+
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
                 "&2- Steinaxt",
-                "&2- Stärketrank",
+                "&2- Regenerationstrank",
                 "&2- Eisenhelm",
                 "&2- Kettenbrust",
                 "&2- Lederhose",
@@ -564,7 +567,7 @@ class KitManager {
         k.legs = new CItemStack(Material.LEATHER_LEGGINGS).makeUnbreakable().finish();
         k.boots = new CItemStack(Material.LEATHER_BOOTS).makeUnbreakable().finish();
         k.hotbar[0] = new CItemStack(Material.STONE_AXE).makeUnbreakable().finish();
-        k.hotbar[1] = new CPotion(PotionType.STRENGTH, 1, false, false).toStack().finish();
+        k.hotbar[1] = new CPotion(PotionType.REGEN, 1, false, false).toStack().finish();
 
 
         addKit(k);

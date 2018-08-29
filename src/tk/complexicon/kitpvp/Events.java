@@ -271,7 +271,7 @@ public class Events implements Listener {
                             if(k.buyable){
                                 if(econ.getBalance(p) >= k.price){
                                     econ.withdrawPlayer(p, k.price);
-                                    perms.playerAdd(p, k.permission);
+                                    perms.playerAdd(null, p, k.permission);
                                     p.sendMessage("§aDu hast erfolgreich das Kit: " + c.getItemMeta().getDisplayName() + "§a gekauft. Vielen Dank!");
                                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 0.8F);
                                     p.closeInventory();
