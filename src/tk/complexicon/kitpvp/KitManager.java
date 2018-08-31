@@ -155,11 +155,14 @@ class KitManager {
     private void tank() {
         Kit k = new Kit();
 
+        k.price = 500;
+        k.permission = "kitpvp.tank";
+
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
                 "&2- Steinschwert",
                 "&2- Volle Diamantrüstung",
-                "&c- Permanent Langsamkeit 1"
+                "&c- Permanent Langsamkeit 2"
         };
 
         k.displayItem = new CItemStack(Material.DIAMOND_CHESTPLATE).setName("&bTank").addLore(lore).finish();
@@ -171,7 +174,7 @@ class KitManager {
 
         k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().finish();
 
-        k.addEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 0));
+        k.addEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 1));
 
         addKit(k);
     }
@@ -402,6 +405,7 @@ class KitManager {
                 "&6Dieses Kit beinhaltet:",
                 "&2- Steinschwert",
                 "&2- Volle Kettenrüstung",
+                "&2- Federfall X Schuhe",
                 "&2- 1 Werfbarer Heilungstrank",
                 "&5- Permanent Sprungkraft",
                 "&5- Permanent Geschwindigkeit"
@@ -412,7 +416,7 @@ class KitManager {
         k.helm = new CItemStack(Material.CHAINMAIL_HELMET).makeUnbreakable().finish();
         k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().finish();
         k.legs = new CItemStack(Material.CHAINMAIL_LEGGINGS).makeUnbreakable().finish();
-        k.boots = new CItemStack(Material.CHAINMAIL_BOOTS).makeUnbreakable().finish();
+        k.boots = new CItemStack(Material.CHAINMAIL_BOOTS).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_FALL, 10).finish();
 
         k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().finish();
         k.hotbar[1] = new CPotion(PotionType.INSTANT_HEAL, 2, true, false).toStack().finish();
@@ -554,7 +558,7 @@ class KitManager {
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
                 "&2- Steinaxt",
-                "&2- Regenerationstrank",
+                "&2- Regenerationstrank Level 2",
                 "&2- Eisenhelm",
                 "&2- Kettenbrust",
                 "&2- Lederhose",
@@ -567,7 +571,7 @@ class KitManager {
         k.legs = new CItemStack(Material.LEATHER_LEGGINGS).makeUnbreakable().finish();
         k.boots = new CItemStack(Material.LEATHER_BOOTS).makeUnbreakable().finish();
         k.hotbar[0] = new CItemStack(Material.STONE_AXE).makeUnbreakable().finish();
-        k.hotbar[1] = new CPotion(PotionType.REGEN, 1, false, false).toStack().finish();
+        k.hotbar[1] = new CPotion(PotionType.REGEN, 2, false, false).toStack().finish();
 
 
         addKit(k);
