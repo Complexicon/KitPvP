@@ -114,6 +114,7 @@ class KitManager {
                 .addEnchantment(Enchantment.ARROW_DAMAGE, 2)
                 .addEnchantment(Enchantment.ARROW_KNOCKBACK, 1).build();
         k.hotbar[7] = new CPotion().addInstantEffect(true).splash().build();
+        k.hotbar[8] = new CItemStack(Material.ARROW).setName("&6Legendärer Pfeil").build();
 
         k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
 

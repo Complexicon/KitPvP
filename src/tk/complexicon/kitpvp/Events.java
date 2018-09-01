@@ -396,7 +396,7 @@ public class Events implements Listener {
                     killer.sendMessage("§aDu hast: ©" + ChatColor.GOLD + "+" + base + " §aErhalten!");
                 }else{
                     econ.depositPlayer(killer, base + boost);
-                    killer.sendMessage("§aDu hast: §6+©" + base + " §aund Boost: §b+©" + boost +" §aErhalten! §6(©+" + (base + boost) + ")");
+                    killer.sendMessage("§aDu hast: §6+©" + base + " §aund Boost: §b+©" + boost +" §aErhalten! §6(+©" + (base + boost) + ")");
                 }
 
             }
