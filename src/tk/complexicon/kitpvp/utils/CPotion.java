@@ -31,7 +31,7 @@ public class CPotion extends CItemStack {
     }
 
     public CPotion addPotionEffect(PotionEffectType type,int amplifier, int duration){
-        pMeta.addCustomEffect(new PotionEffect(type, duration*20, amplifier, false), true);
+        pMeta.addCustomEffect(new PotionEffect(type, duration*20, amplifier), true);
         i.setItemMeta(pMeta);
         return this;
     }

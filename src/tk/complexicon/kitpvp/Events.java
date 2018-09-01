@@ -220,7 +220,6 @@ public class Events implements Listener {
                         p.sendMessage("§aErfolgreich das Kit " + c.getItemMeta().getDisplayName() + " §a Ausgewählt!");
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 3, 1);
                         p.closeInventory();
-                        p.setHealth(20);
 
                         PlayerInventory pi = p.getInventory();
 
@@ -259,6 +258,8 @@ public class Events implements Listener {
                         for(ItemStack extra : k.extra){
                             pi.addItem(extra);
                         }
+
+                        p.setHealth(p.getMaxHealth());
 
                     }else{
 
