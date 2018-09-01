@@ -122,7 +122,7 @@ public class Events implements Listener {
 
                         curLore.addAll(0, statusLore);
 
-                        dummy.setItem(x, displayItem.addLore(curLore.toArray(new String[0])).finish());
+                        dummy.setItem(x, displayItem.addLore(curLore.toArray(new String[0])).build());
                         x++;
                     }
 
@@ -320,7 +320,7 @@ public class Events implements Listener {
         if(e.getPlayer().hasPotionEffect(PotionEffectType.INVISIBILITY)){
             Player p = e.getPlayer();
             if(!e.isSneaking()){
-                p.getInventory().setBoots(new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().finish());
+                p.getInventory().setBoots(new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().build());
             }else{
                 p.getInventory().setBoots(null);
             }

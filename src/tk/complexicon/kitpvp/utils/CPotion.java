@@ -1,37 +1,64 @@
 package tk.complexicon.kitpvp.utils;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
-@SuppressWarnings("deprecation")
-public class CPotion {
+public class CPotion extends CItemStack {
 
-    private Potion p;
+    PotionMeta pMeta;
+    Potion p;
 
-    public CPotion(PotionType type, int level, boolean splash, boolean extend){
-        p = new Potion(type, level, splash);
-        if(extend) p.setHasExtendedDuration(true);
+    public CPotion() {
+        super(Material.POTION);
+        p = new Potion(PotionType.JUMP);
+        pMeta = (PotionMeta) i.getItemMeta();
+        meta = pMeta;
     }
 
-    public CPotion(PotionType type, int level, boolean extend){
-        p = new Potion(type, level, false);
-        if(extend) p.setHasExtendedDuration(true);
+    public CPotion setType(PotionType type){
+        p.setType(type);
+        return this;
     }
 
-    public CPotion(PotionType type, int level){
-        p = new Potion(type, level, false);
+    public CPotion splash(){
+        p.setSplash(true);
+        return this;
     }
 
-    public CPotion(PotionType type){
-        p = new Potion(type, 1, false);
+    public CPotion addPotionEffect(PotionEffectType type,int amplifier, int duration){
+        pMeta.addCustomEffect(new PotionEffect(type, duration*20, amplifier, false), true);
+        i.setItemMeta(pMeta);
+        return this;
     }
 
-    public CItemStack toStack(int amount){
-        return new CItemStack(p.toItemStack(amount));
+    public CPotion addPotionEffect(PotionEffectType type, int duration){
+        return addPotionEffect(type, 0, duration);
     }
 
-    public CItemStack toStack(){
-        return new CItemStack(p.toItemStack(1));
+    public CPotion addInstantEffect(boolean isHeal, int amplifier){
+        if(isHeal){
+            return addPotionEffect(PotionEffectType.HEAL, amplifier, 1).setType(PotionType.INSTANT_HEAL);
+        }
+        return addPotionEffect(PotionEffectType.HARM, amplifier, 1).setType(PotionType.INSTANT_DAMAGE);
+    }
+
+    public CPotion addInstantEffect(boolean isHeal){
+        if(isHeal){
+            return addPotionEffect(PotionEffectType.HEAL, 0, 1).setType(PotionType.INSTANT_HEAL);
+        }
+        return addPotionEffect(PotionEffectType.HARM, 0, 1).setType(PotionType.INSTANT_DAMAGE);
+    }
+
+    @Override
+    public ItemStack build(){
+        p.apply(i);
+        i.setItemMeta(pMeta);
+        return i;
     }
 
 }

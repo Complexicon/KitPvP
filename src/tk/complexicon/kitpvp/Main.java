@@ -25,6 +25,7 @@ public class Main extends JavaPlugin implements Listener {
     ScoreboardManager manager;
     Scoreboard board;
     Team invisible;
+    String teamName = "invisible";
 
 
     public void onEnable(){
@@ -36,7 +37,12 @@ public class Main extends JavaPlugin implements Listener {
 
         manager = Bukkit.getScoreboardManager();
         board = manager.getMainScoreboard();
-        invisible = board.registerNewTeam("invisible");
+
+        if(board.getTeam(teamName) != null){
+            board.getTeam(teamName).unregister();
+        }
+
+        invisible = board.registerNewTeam(teamName);
         invisible.setNameTagVisibility(NameTagVisibility.NEVER);
         l.info("Enabled KitPvP");
     }

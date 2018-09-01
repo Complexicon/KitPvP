@@ -11,12 +11,11 @@ import java.util.List;
 
 public class CItemStack {
 
-    private ItemStack i;
-    private ItemMeta meta;
+    ItemStack i;
+    ItemMeta meta;
 
     public CItemStack(Material m){
-        this.i = new ItemStack(m);
-        this.meta = i.getItemMeta();
+        this(new ItemStack(m));
     }
 
     public CItemStack(ItemStack i){
@@ -30,23 +29,22 @@ public class CItemStack {
     }
 
     public CItemStack(Material m, int amount){
-        this.i = new ItemStack(m, amount);
-        this.meta = i.getItemMeta();
+        this(new ItemStack(m, amount));
     }
 
     public CItemStack addEnchantment(Enchantment e, int lvl){
         meta.addEnchant(e, lvl, true);
-        return applyMeta();
+        return this;
     }
 
     public CItemStack setName(String name){
         meta.setDisplayName(name.replace("&", "§"));
-        return applyMeta();
+        return this;
     }
 
     public CItemStack makeUnbreakable(){
         meta.spigot().setUnbreakable(true);
-        return applyMeta();
+        return this;
     }
 
     public CItemStack addLore(String[] lore){
@@ -58,20 +56,26 @@ public class CItemStack {
         }
 
         meta.setLore(loreList);
-        return applyMeta();
+        return this;
+    }
+
+    public CItemStack setDurability(int durability){
+        i.setDurability((short) durability);
+        return this;
+    }
+
+    public CItemStack setAmt(int amt){
+        i.setAmount(amt);
+        return this;
     }
 
     public List<String> getLore(){
         return meta.getLore();
     }
 
-    public ItemStack finish(){
-        return i;
-    }
-
-    private CItemStack applyMeta(){
+    public ItemStack build(){
         i.setItemMeta(meta);
-        return new CItemStack(i);
+        return i;
     }
 
 }

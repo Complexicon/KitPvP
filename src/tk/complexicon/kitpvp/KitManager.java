@@ -71,15 +71,15 @@ class KitManager {
                 "&2- 2 Goldäpfel"
         };
 
-        k.displayItem = new CItemStack(Material.DIAMOND_SWORD).setName("&9Schwertkämpfer").addLore(lore).finish();
+        k.displayItem = new CItemStack(Material.DIAMOND_SWORD).setName("&9Schwertkämpfer").addLore(lore).build();
 
-        k.helm = new CItemStack(Material.IRON_HELMET).makeUnbreakable().finish();
-        k.chest = new CItemStack(Material.IRON_CHESTPLATE).makeUnbreakable().finish();
-        k.legs = new CItemStack(Material.IRON_LEGGINGS).makeUnbreakable().finish();
-        k.boots = new CItemStack(Material.IRON_BOOTS).makeUnbreakable().finish();
+        k.helm = new CItemStack(Material.IRON_HELMET).makeUnbreakable().build();
+        k.chest = new CItemStack(Material.IRON_CHESTPLATE).makeUnbreakable().build();
+        k.legs = new CItemStack(Material.IRON_LEGGINGS).makeUnbreakable().build();
+        k.boots = new CItemStack(Material.IRON_BOOTS).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.DIAMOND_SWORD).makeUnbreakable().finish();
-        k.hotbar[1] = new CItemStack(Material.GOLDEN_APPLE, 2).finish();
+        k.hotbar[0] = new CItemStack(Material.DIAMOND_SWORD).makeUnbreakable().build();
+        k.hotbar[1] = new CItemStack(Material.GOLDEN_APPLE, 2).build();
 
         addKit(k);
 
@@ -91,9 +91,8 @@ class KitManager {
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
                 "&2- Holzschwert Schärfe 1",
-                "&2- Bogen Stärke 2 Schlag 1",
-                "&2- Trank der Heilung",
-                "&2- 64 Pfeile",
+                "&2- Bogen Stärke 2, Schlag 1, Unendlichkeit",
+                "&2- Werfbarer Trank der Heilung",
                 "&2- Lederkappe",
                 "&2- Kettenbrustpanzer",
                 "&2- Lederhose",
@@ -101,17 +100,19 @@ class KitManager {
                 "&5- Permanent Geschwindigkeit 1"
         };
 
-        k.displayItem = new CItemStack(Material.BOW).setName("&2Archer").addLore(lore).finish();
+        k.displayItem = new CItemStack(Material.BOW).setName("&2Archer").addLore(lore).build();
 
-        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.GREEN).makeUnbreakable().addLore(lore).finish();
-        k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().finish();
-        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.GREEN).makeUnbreakable().finish();
-        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GREEN).makeUnbreakable().finish();
+        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.GREEN).makeUnbreakable().addLore(lore).build();
+        k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().build();
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.GREEN).makeUnbreakable().build();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GREEN).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.WOOD_SWORD).makeUnbreakable().addEnchantment(Enchantment.DAMAGE_ALL, 1).finish();
-        k.hotbar[1] = new CItemStack(Material.BOW).makeUnbreakable().addEnchantment(Enchantment.ARROW_DAMAGE, 2).addEnchantment(Enchantment.ARROW_KNOCKBACK, 1).finish();
-        k.hotbar[7] = new CPotion(PotionType.INSTANT_HEAL).toStack().finish();
-        k.hotbar[8] = new CItemStack(Material.ARROW, 64).finish();
+        k.hotbar[0] = new CItemStack(Material.WOOD_SWORD).makeUnbreakable().build();
+        k.hotbar[1] = new CItemStack(Material.BOW).makeUnbreakable()
+                .addEnchantment(Enchantment.ARROW_INFINITE, 1)
+                .addEnchantment(Enchantment.ARROW_DAMAGE, 2)
+                .addEnchantment(Enchantment.ARROW_KNOCKBACK, 1).build();
+        k.hotbar[7] = new CPotion().addInstantEffect(true).splash().build();
 
         k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
 
@@ -134,17 +135,17 @@ class KitManager {
                 "&5- Permanent Feuerschutz 1"
         };
 
-        k.displayItem = new CItemStack(Material.FIREBALL).setName("&6Pyro").addLore(lore).finish();
+        k.displayItem = new CItemStack(Material.FIREBALL).setName("&6Pyro").addLore(lore).build();
 
-        k.helm = new CItemStack(Material.GOLD_HELMET).makeUnbreakable().finish();
-        k.chest = new CItemStack(Material.GOLD_CHESTPLATE).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).finish();
-        k.legs = new CItemStack(Material.GOLD_LEGGINGS).makeUnbreakable().finish();
-        k.boots = new CItemStack(Material.GOLD_BOOTS).makeUnbreakable().finish();
+        k.helm = new CItemStack(Material.GOLD_HELMET).makeUnbreakable().build();
+        k.chest = new CItemStack(Material.GOLD_CHESTPLATE).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).build();
+        k.legs = new CItemStack(Material.GOLD_LEGGINGS).makeUnbreakable().build();
+        k.boots = new CItemStack(Material.GOLD_BOOTS).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.GOLD_SWORD).makeUnbreakable().addEnchantment(Enchantment.FIRE_ASPECT, 1).setName("&6Flammenschwert").finish();
-        k.hotbar[1] = new CItemStack(Material.BOW).makeUnbreakable().addEnchantment(Enchantment.ARROW_FIRE, 1).setName("&6Flammenbogen").finish();
-        k.hotbar[7] = new CItemStack(Material.GOLDEN_APPLE, 2).finish();
-        k.hotbar[8] = new CItemStack(Material.ARROW, 32).finish();
+        k.hotbar[0] = new CItemStack(Material.GOLD_SWORD).makeUnbreakable().addEnchantment(Enchantment.FIRE_ASPECT, 1).setName("&6Flammenschwert").build();
+        k.hotbar[1] = new CItemStack(Material.BOW).makeUnbreakable().addEnchantment(Enchantment.ARROW_FIRE, 1).setName("&6Flammenbogen").build();
+        k.hotbar[7] = new CItemStack(Material.GOLDEN_APPLE, 2).build();
+        k.hotbar[8] = new CItemStack(Material.ARROW, 32).build();
 
 
         k.addEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 0));
@@ -165,14 +166,14 @@ class KitManager {
                 "&c- Permanent Langsamkeit 2"
         };
 
-        k.displayItem = new CItemStack(Material.DIAMOND_CHESTPLATE).setName("&bTank").addLore(lore).finish();
+        k.displayItem = new CItemStack(Material.DIAMOND_CHESTPLATE).setName("&bTank").addLore(lore).build();
 
-        k.helm = new CItemStack(Material.DIAMOND_HELMET).makeUnbreakable().finish();
-        k.chest = new CItemStack(Material.DIAMOND_CHESTPLATE).makeUnbreakable().finish();
-        k.legs = new CItemStack(Material.DIAMOND_LEGGINGS).makeUnbreakable().finish();
-        k.boots = new CItemStack(Material.DIAMOND_BOOTS).makeUnbreakable().finish();
+        k.helm = new CItemStack(Material.DIAMOND_HELMET).makeUnbreakable().build();
+        k.chest = new CItemStack(Material.DIAMOND_CHESTPLATE).makeUnbreakable().build();
+        k.legs = new CItemStack(Material.DIAMOND_LEGGINGS).makeUnbreakable().build();
+        k.boots = new CItemStack(Material.DIAMOND_BOOTS).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().finish();
+        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().build();
 
         k.addEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 1));
 
@@ -192,10 +193,10 @@ class KitManager {
                 "&5- Permanent Stärke 1"
         };
 
-        k.displayItem = new CItemStack(Material.IRON_SWORD).setName("&4Berserker").addLore(lore).finish();
-        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.RED).makeUnbreakable().finish();
+        k.displayItem = new CItemStack(Material.IRON_SWORD).setName("&4Berserker").addLore(lore).build();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.RED).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.IRON_SWORD).makeUnbreakable().finish();
+        k.hotbar[0] = new CItemStack(Material.IRON_SWORD).makeUnbreakable().build();
 
         k.addEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0));
 
@@ -219,14 +220,14 @@ class KitManager {
 
         };
 
-        k.displayItem = new CItemStack(Material.SNOW_BALL).setName("&7Schneemann").addLore(lore).finish();
-        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.WHITE).makeUnbreakable().finish();
-        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.WHITE).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).finish();
-        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.WHITE).makeUnbreakable().finish();
-        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.WHITE).makeUnbreakable().finish();
+        k.displayItem = new CItemStack(Material.SNOW_BALL).setName("&7Schneemann").addLore(lore).build();
+        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.WHITE).makeUnbreakable().build();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.WHITE).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).build();
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.WHITE).makeUnbreakable().build();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.WHITE).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().addEnchantment(Enchantment.DAMAGE_ALL, 1).finish();
-        k.hotbar[1] = new CItemStack(Material.SNOW_BALL, 64).finish();
+        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().addEnchantment(Enchantment.DAMAGE_ALL, 1).build();
+        k.hotbar[1] = new CItemStack(Material.SNOW_BALL, 64).build();
 
         k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
 
@@ -251,16 +252,16 @@ class KitManager {
                 "&5- Permanent Geschwindigkeit 1"
         };
 
-        k.displayItem = new CItemStack(Material.ENDER_PEARL).setName("&3Ender").addLore(lore).finish();
+        k.displayItem = new CItemStack(Material.ENDER_PEARL).setName("&3Ender").addLore(lore).build();
 
-        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.BLACK).makeUnbreakable().finish();
-        k.chest = new CItemStack(Material.IRON_CHESTPLATE).addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1).makeUnbreakable().finish();
-        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.BLACK).makeUnbreakable().finish();
-        k.boots = new CItemStack(Material.IRON_BOOTS).addEnchantment(Enchantment.PROTECTION_FALL, 10).makeUnbreakable().finish();
+        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.BLACK).makeUnbreakable().build();
+        k.chest = new CItemStack(Material.IRON_CHESTPLATE).addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1).makeUnbreakable().build();
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.BLACK).makeUnbreakable().build();
+        k.boots = new CItemStack(Material.IRON_BOOTS).addEnchantment(Enchantment.PROTECTION_FALL, 10).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().finish();
-        k.hotbar[1] = new CItemStack(Material.ENDER_PEARL, 16).finish();
-        k.hotbar[8] = new CItemStack(Material.GOLDEN_APPLE, 2).finish();
+        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().build();
+        k.hotbar[1] = new CItemStack(Material.ENDER_PEARL, 16).build();
+        k.hotbar[8] = new CItemStack(Material.GOLDEN_APPLE, 2).build();
 
         k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
 
@@ -281,15 +282,15 @@ class KitManager {
                 "&5- Heilung beim nutzen der Suppen"
         };
 
-        k.displayItem = new CItemStack(Material.MUSHROOM_SOUP).setName("&eSoup").addLore(lore).finish();
+        k.displayItem = new CItemStack(Material.MUSHROOM_SOUP).setName("&eSoup").addLore(lore).build();
 
-        k.helm = new CItemStack(Material.CHAINMAIL_HELMET).makeUnbreakable().finish();
-        k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().finish();
-        k.legs = new CItemStack(Material.CHAINMAIL_LEGGINGS).makeUnbreakable().finish();
-        k.boots = new CItemStack(Material.CHAINMAIL_BOOTS).makeUnbreakable().finish();
+        k.helm = new CItemStack(Material.CHAINMAIL_HELMET).makeUnbreakable().build();
+        k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().build();
+        k.legs = new CItemStack(Material.CHAINMAIL_LEGGINGS).makeUnbreakable().build();
+        k.boots = new CItemStack(Material.CHAINMAIL_BOOTS).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().finish();
-        k.multiStack(new CItemStack(Material.MUSHROOM_SOUP).setName("&eZaubersuppe").finish(), 8);
+        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().build();
+        k.multiStack(new CItemStack(Material.MUSHROOM_SOUP).setName("&eZaubersuppe").build(), 8);
 
         addKit(k);
     }
@@ -311,16 +312,16 @@ class KitManager {
                 "&2- Kettenschuhe"
         };
 
-        k.displayItem = new CItemStack(Material.FISHING_ROD).setName("&bAngler").addLore(lore).finish();
+        k.displayItem = new CItemStack(Material.FISHING_ROD).setName("&bAngler").addLore(lore).build();
 
-        k.helm = new CItemStack(Material.CHAINMAIL_HELMET).makeUnbreakable().finish();
-        k.chest = new CItemStack(Material.LEATHER_CHESTPLATE).makeUnbreakable().finish();
-        k.legs = new CItemStack(Material.CHAINMAIL_LEGGINGS).makeUnbreakable().finish();
-        k.boots = new CItemStack(Material.CHAINMAIL_BOOTS).makeUnbreakable().finish();
+        k.helm = new CItemStack(Material.CHAINMAIL_HELMET).makeUnbreakable().build();
+        k.chest = new CItemStack(Material.LEATHER_CHESTPLATE).makeUnbreakable().build();
+        k.legs = new CItemStack(Material.CHAINMAIL_LEGGINGS).makeUnbreakable().build();
+        k.boots = new CItemStack(Material.CHAINMAIL_BOOTS).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.IRON_SWORD).makeUnbreakable().finish();
-        k.hotbar[1] = new CItemStack(Material.FISHING_ROD).makeUnbreakable().finish();
-        k.hotbar[8] = new CItemStack(Material.GOLDEN_APPLE, 2).finish();
+        k.hotbar[0] = new CItemStack(Material.IRON_SWORD).makeUnbreakable().build();
+        k.hotbar[1] = new CItemStack(Material.FISHING_ROD).makeUnbreakable().build();
+        k.hotbar[8] = new CItemStack(Material.GOLDEN_APPLE, 2).build();
 
         addKit(k);
     }
@@ -339,12 +340,12 @@ class KitManager {
                 "&5- 14 Goldene Extraherzen"
         };
 
-        k.displayItem = new CItemStack(Material.GOLDEN_APPLE).setName("&6Templer").addLore(lore).finish();
+        k.displayItem = new CItemStack(Material.GOLDEN_APPLE).setName("&6Templer").addLore(lore).build();
 
-        k.chest = new CItemStack(Material.IRON_CHESTPLATE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).makeUnbreakable().finish();
+        k.chest = new CItemStack(Material.IRON_CHESTPLATE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.IRON_SWORD).makeUnbreakable().finish();
-        k.hotbar[8] = new CPotion(PotionType.INSTANT_HEAL, 1, true, false).toStack(2).finish();
+        k.hotbar[0] = new CItemStack(Material.IRON_SWORD).makeUnbreakable().build();
+        k.hotbar[8] = new CPotion().addInstantEffect(true).splash().setAmt(2).build();
 
         k.addEffect(new PotionEffect(PotionEffectType.ABSORPTION, Integer.MAX_VALUE, 6));
 
@@ -373,21 +374,21 @@ class KitManager {
                 "&5- Permanent Nachtsicht"
         };
 
-        k.displayItem = new CItemStack(Material.POTION).setName("&6Magier").addLore(lore).finish();
+        k.displayItem = new CItemStack(Material.POTION).setName("&6Magier").addLore(lore).build();
 
-        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.FUCHSIA).makeUnbreakable().finish();
-        k.chest = new CItemStack(Material.IRON_CHESTPLATE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).makeUnbreakable().finish();
-        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.FUCHSIA).makeUnbreakable().finish();
-        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.FUCHSIA).makeUnbreakable().finish();
+        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.FUCHSIA).makeUnbreakable().build();
+        k.chest = new CItemStack(Material.IRON_CHESTPLATE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).makeUnbreakable().build();
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.FUCHSIA).makeUnbreakable().build();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.FUCHSIA).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.WOOD_SWORD).makeUnbreakable().finish();
-        k.hotbar[1] = new CPotion(PotionType.INSTANT_DAMAGE, 2, true, false).toStack().finish();
-        k.hotbar[2] = new CPotion(PotionType.INSTANT_DAMAGE, 1, true, false).toStack(2).finish();
+        k.hotbar[0] = new CItemStack(Material.WOOD_SWORD).makeUnbreakable().build();
+        k.hotbar[1] = new CPotion().addInstantEffect(false, 1).splash().build();
+        k.hotbar[2] = new CPotion().addInstantEffect(false).splash().setAmt(2).build();
 
-        k.hotbar[4] = new CPotion(PotionType.INSTANT_HEAL, 2, true, false).toStack(2).finish();
-        k.hotbar[5] = new CPotion(PotionType.SPEED, 1, true, false).toStack().finish();
-        k.hotbar[7] = new CPotion(PotionType.REGEN, 1, false, true).toStack().finish();
-        k.hotbar[8] = new CPotion(PotionType.FIRE_RESISTANCE, 1, false, false).toStack().finish();
+        k.hotbar[4] = new CPotion().addInstantEffect(true).splash().setAmt(2).build();
+        k.hotbar[5] = new CPotion().addPotionEffect(PotionEffectType.SPEED, 1, 60).setType(PotionType.SPEED).build();
+        k.hotbar[7] = new CPotion().addPotionEffect(PotionEffectType.REGENERATION, 30).setType(PotionType.REGEN).build();
+        k.hotbar[8] = new CPotion().addPotionEffect(PotionEffectType.FIRE_RESISTANCE, 120).setType(PotionType.FIRE_RESISTANCE).build();
 
 
         k.addEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0));
@@ -411,15 +412,15 @@ class KitManager {
                 "&5- Permanent Geschwindigkeit"
         };
 
-        k.displayItem = new CItemStack(Material.RABBIT_FOOT).setName("&aHase").addLore(lore).finish();
+        k.displayItem = new CItemStack(Material.RABBIT_FOOT).setName("&aHase").addLore(lore).build();
 
-        k.helm = new CItemStack(Material.CHAINMAIL_HELMET).makeUnbreakable().finish();
-        k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().finish();
-        k.legs = new CItemStack(Material.CHAINMAIL_LEGGINGS).makeUnbreakable().finish();
-        k.boots = new CItemStack(Material.CHAINMAIL_BOOTS).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_FALL, 10).finish();
+        k.helm = new CItemStack(Material.CHAINMAIL_HELMET).makeUnbreakable().build();
+        k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().build();
+        k.legs = new CItemStack(Material.CHAINMAIL_LEGGINGS).makeUnbreakable().build();
+        k.boots = new CItemStack(Material.CHAINMAIL_BOOTS).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_FALL, 10).build();
 
-        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().finish();
-        k.hotbar[1] = new CPotion(PotionType.INSTANT_HEAL, 2, true, false).toStack().finish();
+        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().build();
+        k.hotbar[1] = new CPotion().addInstantEffect(true, 1).splash().build();
 
         k.addEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 1));
         k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
@@ -443,17 +444,17 @@ class KitManager {
                 "&2- Heilungstrank"
         };
 
-        k.displayItem = new CItemStack(Material.SPIDER_EYE).addLore(lore).setName("&2Witch").finish();
-        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.GRAY).makeUnbreakable().finish();
-        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.GRAY).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).addEnchantment(Enchantment.THORNS, 1).finish();
-        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.GRAY).makeUnbreakable().finish();
-        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GRAY).makeUnbreakable().finish();
+        k.displayItem = new CItemStack(Material.SPIDER_EYE).addLore(lore).setName("&2Witch").build();
+        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.GRAY).makeUnbreakable().build();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.GRAY).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).addEnchantment(Enchantment.THORNS, 1).build();
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.GRAY).makeUnbreakable().build();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GRAY).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().finish();
-        k.hotbar[1] = new CPotion(PotionType.WEAKNESS, 1, true, false).toStack(2).finish();
-        k.hotbar[2] = new CPotion(PotionType.SLOWNESS, 1, true, false).toStack().finish();
-        k.hotbar[3] = new CPotion(PotionType.POISON, 1, true, false).toStack().finish();
-        k.hotbar[4] = new CPotion(PotionType.INSTANT_HEAL, 2).toStack().finish();
+        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().build();
+        k.hotbar[1] = new CPotion().addPotionEffect(PotionEffectType.WEAKNESS, 120).setType(PotionType.WEAKNESS).splash().build();
+        k.hotbar[2] = new CPotion().addPotionEffect(PotionEffectType.SLOW, 30).setType(PotionType.SLOWNESS).splash().build();
+        k.hotbar[3] = new CPotion().addPotionEffect(PotionEffectType.POISON, 30).setType(PotionType.POISON).splash().build();
+        k.hotbar[4] = new CPotion().addInstantEffect(true, 1).build();
 
         addKit(k);
     }
@@ -473,14 +474,14 @@ class KitManager {
                 "&2- Kanadischer Sirup"
         };
 
-        k.displayItem = new CItemStack(Material.IRON_AXE).addLore(lore).setName("&cDer Kanadier").finish();
+        k.displayItem = new CItemStack(Material.IRON_AXE).addLore(lore).setName("&cDer Kanadier").build();
 
-        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.RED).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).finish();
-        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.BLUE).makeUnbreakable().finish();
-        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().finish();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.RED).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).build();
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.BLUE).makeUnbreakable().build();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.IRON_AXE).addEnchantment(Enchantment.DAMAGE_ALL, 1).makeUnbreakable().finish();
-        k.hotbar[1] = new CPotion(PotionType.INSTANT_HEAL, 2).toStack().setName("&6Sirup").finish();
+        k.hotbar[0] = new CItemStack(Material.IRON_AXE).addEnchantment(Enchantment.DAMAGE_ALL, 1).makeUnbreakable().build();
+        k.hotbar[1] = new CPotion().addInstantEffect(true).setName("&6Sirup").build();
 
         addKit(k);
     }
@@ -498,12 +499,12 @@ class KitManager {
                 "&5- *Geisterhaft*"
         };
 
-        k.displayItem = new CItemStack(Material.GLASS_BOTTLE).addLore(lore).setName("Geist").finish();
+        k.displayItem = new CItemStack(Material.GLASS_BOTTLE).addLore(lore).setName("Geist").build();
 
-        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().finish();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().build();
 
-        k.hotbar[0] = new CItemStack(Material.WOOD_SWORD).makeUnbreakable().finish();
-        k.hotbar[1] = new CPotion(PotionType.INSTANT_HEAL, 1, true, false).toStack().finish();
+        k.hotbar[0] = new CItemStack(Material.WOOD_SWORD).makeUnbreakable().build();
+        k.hotbar[1] = new CPotion().addInstantEffect(true, 1).splash().setAmt(2).build();
 
         k.addEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
         
@@ -525,26 +526,26 @@ class KitManager {
                 "&2- Karamellapfel"
         };
 
-        k.displayItem = new CItemStack(Material.CAKE).addLore(lore).setName("&bDie Hausfrau").finish();
+        k.displayItem = new CItemStack(Material.CAKE).addLore(lore).setName("&bDie Hausfrau").build();
 
         k.boots = new CItemStack(Material.DIAMOND_BOOTS)
                 .setName("&9Versace Highheels")
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 7)
                 .addEnchantment(Enchantment.THORNS, 2)
                 .makeUnbreakable()
-                .finish();
+                .build();
 
-        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.FUCHSIA).setName("&dGucci-Top").finish();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.FUCHSIA).setName("&dGucci-Top").build();
 
         k.hotbar[0] = new CItemStack(Material.WOOD_SPADE)
                 .makeUnbreakable()
                 .setName("&cKochlöffel der Verdammnis")
                 .addEnchantment(Enchantment.DAMAGE_ALL, 4)
                 .addEnchantment(Enchantment.KNOCKBACK, 4)
-                .finish();
+                .build();
 
-        k.hotbar[1] = new CPotion(PotionType.INSTANT_HEAL, 2, false, false).toStack().setName("&dHimbeersaft").finish();
-        k.hotbar[2] = new CItemStack(Material.GOLDEN_APPLE).makeUnbreakable().setName("&6Karamellapfel").finish();
+        k.hotbar[1] = new CPotion().addInstantEffect(true, 1).setName("&dHimbeersaft").build();
+        k.hotbar[2] = new CItemStack(Material.GOLDEN_APPLE).makeUnbreakable().setName("&6Karamellapfel").build();
 
         addKit(k);
     }
@@ -565,15 +566,16 @@ class KitManager {
                 "&2- Lederschuhe"
         };
 
-        k.displayItem = new CItemStack(Material.STONE_AXE).addLore(lore).setName("&eBarbar").finish();
-        k.helm = new CItemStack(Material.IRON_HELMET).makeUnbreakable().finish();
-        k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().finish();
-        k.legs = new CItemStack(Material.LEATHER_LEGGINGS).makeUnbreakable().finish();
-        k.boots = new CItemStack(Material.LEATHER_BOOTS).makeUnbreakable().finish();
-        k.hotbar[0] = new CItemStack(Material.STONE_AXE).makeUnbreakable().finish();
-        k.hotbar[1] = new CPotion(PotionType.REGEN, 2, false, false).toStack().finish();
+        k.displayItem = new CItemStack(Material.STONE_AXE).addLore(lore).setName("&eBarbar").build();
+        k.helm = new CItemStack(Material.IRON_HELMET).makeUnbreakable().build();
+        k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().build();
+        k.legs = new CItemStack(Material.LEATHER_LEGGINGS).makeUnbreakable().build();
+        k.boots = new CItemStack(Material.LEATHER_BOOTS).makeUnbreakable().build();
+        k.hotbar[0] = new CItemStack(Material.STONE_AXE).makeUnbreakable().build();
+        k.hotbar[1] = new CPotion().addPotionEffect(PotionEffectType.REGENERATION, 1, 20).setType(PotionType.REGEN).build();
 
 
         addKit(k);
     }
+
 }
