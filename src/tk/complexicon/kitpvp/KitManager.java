@@ -453,7 +453,7 @@ class KitManager {
         k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GRAY).makeUnbreakable().build();
 
         k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().build();
-        k.hotbar[1] = new CPotion().addPotionEffect(PotionEffectType.WEAKNESS, 120).setType(PotionType.WEAKNESS).splash().build();
+        k.hotbar[1] = new CPotion().addPotionEffect(PotionEffectType.WEAKNESS, 120).setType(PotionType.WEAKNESS).splash().setAmt(2).build();
         k.hotbar[2] = new CPotion().addPotionEffect(PotionEffectType.SLOW, 30).setType(PotionType.SLOWNESS).splash().build();
         k.hotbar[3] = new CPotion().addPotionEffect(PotionEffectType.POISON, 30).setType(PotionType.POISON).splash().build();
         k.hotbar[4] = new CPotion().addInstantEffect(true, 1).build();
@@ -597,7 +597,7 @@ class KitManager {
                 "&2- 3x Werfbare Regeneration",
                 "&2- Kräfties Gebräu der Hexenmutter",
                 "&5- Permanent 4 Extraherzen",
-                "&c- Permanent Schwäche 1"
+                "&c- Permanent Schwäche 2"
         };
 
         k.displayItem = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.RED).addLore(lore).setName("&cSupporter").build();
@@ -622,7 +622,7 @@ class KitManager {
                 .setName("&2Kräftiges Gebräu der Hexenmutter").build();
 
         k.effects.add(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 1));
-        k.effects.add(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0));
+        k.effects.add(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 2));
 
         addKit(k);
     }
