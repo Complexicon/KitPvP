@@ -4,19 +4,18 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import tk.complexicon.kitpvp.utils.CItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CLeatherArmor {
+public class CLeatherArmor extends CItemStack {
 
-    ItemStack i;
-    LeatherArmorMeta m;
+    LeatherArmorMeta lMeta;
 
     List<Material> leather = new ArrayList();
 
     public CLeatherArmor(Material mat){
+        super(mat);
 
         leather.add(Material.LEATHER_BOOTS);
         leather.add(Material.LEATHER_LEGGINGS);
@@ -25,14 +24,21 @@ public class CLeatherArmor {
 
         if(leather.contains(mat)){
             i = new ItemStack(mat);
-            m = (LeatherArmorMeta) i.getItemMeta();
+            lMeta = (LeatherArmorMeta) i.getItemMeta();
+            meta = lMeta;
         }
     }
 
-    public CItemStack color(Color c){
-        m.setColor(c);
-        i.setItemMeta(m);
-        return new CItemStack(i);
+    public CLeatherArmor color(Color c){
+        lMeta.setColor(c);
+        i.setItemMeta(lMeta);
+        return this;
+    }
+
+    @Override
+    public ItemStack build(){
+        i.setItemMeta(lMeta);
+        return i;
     }
 
 }

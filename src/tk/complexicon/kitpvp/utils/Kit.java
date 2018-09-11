@@ -16,7 +16,7 @@ public class Kit {
     public boolean buyable = true;
     public int price = 0;
 
-    public ItemStack displayItem = new CItemStack(Material.BARRIER).setName("§aDEFAULT").finish();
+    public ItemStack displayItem = new CItemStack(Material.BARRIER).setName("§aDEFAULT").build();
 
     public ItemStack helm = air;
     public ItemStack chest = air;

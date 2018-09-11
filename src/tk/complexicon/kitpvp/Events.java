@@ -122,7 +122,7 @@ public class Events implements Listener {
 
                         curLore.addAll(0, statusLore);
 
-                        dummy.setItem(x, displayItem.addLore(curLore.toArray(new String[0])).finish());
+                        dummy.setItem(x, displayItem.addLore(curLore.toArray(new String[0])).build());
                         x++;
                     }
 
@@ -220,7 +220,6 @@ public class Events implements Listener {
                         p.sendMessage("§aErfolgreich das Kit " + c.getItemMeta().getDisplayName() + " §a Ausgewählt!");
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 3, 1);
                         p.closeInventory();
-                        p.setHealth(20);
 
                         PlayerInventory pi = p.getInventory();
 
@@ -260,6 +259,8 @@ public class Events implements Listener {
                             pi.addItem(extra);
                         }
 
+                        p.setHealth(p.getMaxHealth());
+
                     }else{
 
                         if(e.getClick() == ClickType.RIGHT){
@@ -271,7 +272,7 @@ public class Events implements Listener {
                             if(k.buyable){
                                 if(econ.getBalance(p) >= k.price){
                                     econ.withdrawPlayer(p, k.price);
-                                    perms.playerAdd(p, k.permission);
+                                    perms.playerAdd(null, p, k.permission);
                                     p.sendMessage("§aDu hast erfolgreich das Kit: " + c.getItemMeta().getDisplayName() + "§a gekauft. Vielen Dank!");
                                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 0.8F);
                                     p.closeInventory();
@@ -320,7 +321,7 @@ public class Events implements Listener {
         if(e.getPlayer().hasPotionEffect(PotionEffectType.INVISIBILITY)){
             Player p = e.getPlayer();
             if(!e.isSneaking()){
-                p.getInventory().setBoots(new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().finish());
+                p.getInventory().setBoots(new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().build());
             }else{
                 p.getInventory().setBoots(null);
             }
@@ -395,7 +396,7 @@ public class Events implements Listener {
                     killer.sendMessage("§aDu hast: ©" + ChatColor.GOLD + "+" + base + " §aErhalten!");
                 }else{
                     econ.depositPlayer(killer, base + boost);
-                    killer.sendMessage("§aDu hast: §6+©" + base + " §aund Boost: §b+©" + boost +" §aErhalten! §6(©+" + (base + boost) + ")");
+                    killer.sendMessage("§aDu hast: §6+©" + base + " §aund Boost: §b+©" + boost +" §aErhalten! §6(+©" + (base + boost) + ")");
                 }
 
             }
