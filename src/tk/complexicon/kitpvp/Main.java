@@ -11,12 +11,16 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
+import java.util.logging.Logger;
+
 public class Main extends JavaPlugin implements Listener {
 
     public KitManager km = new KitManager();
     public boolean economyHook;
     public boolean permissionHook;
     public boolean nteHook;
+
+    Logger l = getLogger();
 
     ScoreboardManager manager;
     Scoreboard board;
@@ -30,13 +34,11 @@ public class Main extends JavaPlugin implements Listener {
         permissionHook = setupPermissions();
         nteHook = testNTE();
 
-        System.out.println("ntehook: " + nteHook);
-
         manager = Bukkit.getScoreboardManager();
         board = manager.getMainScoreboard();
         invisible = board.registerNewTeam("invisible");
         invisible.setNameTagVisibility(NameTagVisibility.NEVER);
-        System.out.println("Enabled KitPvP");
+        l.info("Enabled KitPvP");
     }
 
     public void onDisable(){
