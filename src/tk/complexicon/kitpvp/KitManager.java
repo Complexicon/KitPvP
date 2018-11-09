@@ -43,6 +43,7 @@ class KitManager {
         templar();
         mage();
         supporter();
+        oneHit();
 
         ghost();
         ender();
@@ -625,6 +626,27 @@ class KitManager {
 
         k.effects.add(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 1));
         k.effects.add(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 2));
+
+        addKit(k);
+    }
+
+    public void oneHit(){
+        Kit k = new Kit();
+
+        k.price = 10000;
+        k.permission = "kitpvp.onehit";
+
+        String[] lore = new String[]{
+                "&6Dieses Kit beinhaltet:",
+                "&2- Töten oder Getötet Werden ;)",
+        };
+
+        k.displayItem = new CItemStack(Material.BONE).setName("&4Onehit").addLore(lore).build();
+
+        k.hotbar[0] = new CItemStack(Material.BONE).setName("&7Prügelknochen").addEnchantment(Enchantment.DAMAGE_ALL, 10).build();
+
+        k.addEffect(new PotionEffect(PotionEffectType.POISON, Integer.MAX_VALUE, 5));
+        k.addEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 10));
 
         addKit(k);
     }
