@@ -3,6 +3,7 @@ package tk.complexicon.kitpvp.utils;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -69,6 +70,11 @@ public class CItemStack {
         return this;
     }
 
+    public CItemStack hideFlag(ItemFlag i){
+        meta.addItemFlags(i);
+        return this;
+    }
+
     public List<String> getLore(){
         return meta.getLore();
     }
@@ -76,6 +82,6 @@ public class CItemStack {
     public ItemStack build(){
         i.setItemMeta(meta);
         return i;
-
     }
+
 }

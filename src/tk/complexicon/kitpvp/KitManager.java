@@ -6,6 +6,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -377,7 +378,7 @@ class KitManager {
                 "&5- Permanent Nachtsicht"
         };
 
-        k.displayItem = new CItemStack(Material.POTION).setName("&6Magier").addLore(lore).build();
+        k.displayItem = new CPotion().setType(PotionType.NIGHT_VISION).hideFlag(ItemFlag.HIDE_POTION_EFFECTS).setName("&6Magier").addLore(lore).build();
 
         k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.FUCHSIA).makeUnbreakable().build();
         k.chest = new CItemStack(Material.IRON_CHESTPLATE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).makeUnbreakable().build();
@@ -603,7 +604,7 @@ class KitManager {
                 "&c- Permanent Schwäche 2"
         };
 
-        k.displayItem = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.RED).addLore(lore).setName("&cSupporter").build();
+        k.displayItem = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.RED).hideFlag(ItemFlag.HIDE_ATTRIBUTES).addLore(lore).setName("&cSupporter").build();
 
         k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.RED).makeUnbreakable().build();
         k.chest = new CItemStack(Material.GOLD_CHESTPLATE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3).makeUnbreakable().build();
