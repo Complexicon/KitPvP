@@ -32,10 +32,7 @@ import tk.complexicon.kitpvp.utils.CItemStack;
 import tk.complexicon.kitpvp.utils.CLeatherArmor;
 import tk.complexicon.kitpvp.utils.Kit;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Events implements Listener {
 
@@ -98,7 +95,6 @@ public class Events implements Listener {
                 Sign s = (Sign) e.getClickedBlock().getState();
                 if (s.getLine(0).contains("§c-§bKitPvP§c-")) {
                     int multiplier = (int) Math.ceil(m.km.kitlist.size() / 9.0);
-
                     Inventory dummy = Bukkit.createInventory(null, 9 * multiplier, ChatColor.LIGHT_PURPLE + "Kits");
                     int x = 0;
                     for (Kit k : m.km.kitlist) {

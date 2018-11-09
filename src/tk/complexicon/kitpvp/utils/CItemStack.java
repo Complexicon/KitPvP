@@ -76,6 +76,6 @@ public class CItemStack {
     public ItemStack build(){
         i.setItemMeta(meta);
         return i;
-    }
 
+    }
 }

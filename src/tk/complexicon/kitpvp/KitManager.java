@@ -92,7 +92,7 @@ class KitManager {
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
                 "&2- Holzschwert Schärfe 1",
-                "&2- Bogen Stärke 2, Schlag 1, Unendlichkeit",
+                "&2- Bogen Stärke 1, Schlag 1, Unendlichkeit",
                 "&2- Werfbarer Trank der Heilung",
                 "&2- Lederkappe",
                 "&2- Kettenbrustpanzer",
@@ -111,7 +111,7 @@ class KitManager {
         k.hotbar[0] = new CItemStack(Material.WOOD_SWORD).makeUnbreakable().build();
         k.hotbar[1] = new CItemStack(Material.BOW).makeUnbreakable()
                 .addEnchantment(Enchantment.ARROW_INFINITE, 1)
-                .addEnchantment(Enchantment.ARROW_DAMAGE, 2)
+                .addEnchantment(Enchantment.ARROW_DAMAGE, 1)
                 .addEnchantment(Enchantment.ARROW_KNOCKBACK, 1).build();
         k.hotbar[7] = new CPotion().addInstantEffect(true).splash().build();
         k.hotbar[8] = new CItemStack(Material.ARROW).setName("&6Legendärer Pfeil").build();
@@ -618,6 +618,8 @@ class KitManager {
                 .addInstantEffect(true, 2)
                 .addPotionEffect(PotionEffectType.REGENERATION, 1, 44)
                 .addPotionEffect(PotionEffectType.ABSORPTION, 25)
+                .addPotionEffect(PotionEffectType.BLINDNESS, 3)
+                .addPotionEffect(PotionEffectType.CONFUSION, 2)
                 .setType(PotionType.JUMP)
                 .setName("&2Kräftiges Gebräu der Hexenmutter").build();
 
