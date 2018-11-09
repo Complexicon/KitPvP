@@ -633,7 +633,7 @@ class KitManager {
     public void oneHit(){
         Kit k = new Kit();
 
-        k.price = 10000;
+        k.price = 15000;
         k.permission = "kitpvp.onehit";
 
         String[] lore = new String[]{
@@ -644,8 +644,9 @@ class KitManager {
         k.displayItem = new CItemStack(Material.BONE).setName("&4Onehit").addLore(lore).build();
 
         k.hotbar[0] = new CItemStack(Material.BONE).setName("&7Prügelknochen").addEnchantment(Enchantment.DAMAGE_ALL, 10).build();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.RED).addEnchantment(Enchantment.PROTECTION_FALL, 10).makeUnbreakable().build();
 
-        k.addEffect(new PotionEffect(PotionEffectType.POISON, Integer.MAX_VALUE, 5));
+        k.addEffect(new PotionEffect(PotionEffectType.POISON, Integer.MAX_VALUE, 10));
         k.addEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 10));
 
         addKit(k);
