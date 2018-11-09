@@ -99,7 +99,7 @@ public class Events implements Listener {
                     int x = 0;
                     for (Kit k : m.km.kitlist) {
 
-                        CItemStack displayItem = new CItemStack(k.displayItem.getType(), k.displayItem.getItemMeta());
+                        CItemStack displayItem = new CItemStack(k.displayItem.clone());
                         List<String> curLore = displayItem.getLore();
                         List<String> statusLore = new ArrayList();
 
@@ -299,10 +299,12 @@ public class Events implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
-        e.getPlayer().getInventory().clear();
-        e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
-        e.getPlayer().teleport(e.getPlayer().getWorld().getSpawnLocation());
-        e.getPlayer().setMaxHealth(20);
+        Player p = e.getPlayer();
+        p.getInventory().clear();
+        p.getInventory().setArmorContents(new ItemStack[4]);
+        p.teleport(e.getPlayer().getWorld().getSpawnLocation());
+        p.setMaxHealth(20);
+        p.setHealth(p.getMaxHealth());
 
         Bukkit.getScheduler().runTaskLater(m, new Runnable() {
             @Override
