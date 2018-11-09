@@ -302,6 +302,7 @@ public class Events implements Listener {
         e.getPlayer().getInventory().clear();
         e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
         e.getPlayer().teleport(e.getPlayer().getWorld().getSpawnLocation());
+        e.getPlayer().setMaxHealth(20);
 
         Bukkit.getScheduler().runTaskLater(m, new Runnable() {
             @Override

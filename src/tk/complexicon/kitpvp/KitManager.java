@@ -646,10 +646,10 @@ class KitManager {
 
         k.displayItem = new CItemStack(Material.BONE).setName("&4Onehit").addLore(lore).build();
 
-        k.hotbar[0] = new CItemStack(Material.BONE).setName("&cBlutige Keule").build();
+        k.hotbar[0] = new CItemStack(Material.BONE).setName("&cBlutige Keule").addEnchantment(Enchantment.DAMAGE_ALL, 10).build();
         k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.RED).addEnchantment(Enchantment.PROTECTION_FALL, 10).makeUnbreakable().build();
 
-        k.addEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 50));
+        k.addEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 100));
 
         addKit(k);
     }
