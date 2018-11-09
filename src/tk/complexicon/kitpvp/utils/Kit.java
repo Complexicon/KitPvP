@@ -15,6 +15,7 @@ public class Kit {
 
     public boolean buyable = true;
     public int price = 0;
+    public double maxHealth = 20;
 
     public ItemStack displayItem = new CItemStack(Material.BARRIER).setName("§aDEFAULT").build();
 

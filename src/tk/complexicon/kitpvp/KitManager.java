@@ -587,6 +587,8 @@ class KitManager {
         k.permission = "kitpvp.supporter";
         k.price = 2250;
 
+        k.maxHealth = 30;
+
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
                 "&2- Goldbrustplatte Schutz 3",
@@ -624,7 +626,6 @@ class KitManager {
                 .setType(PotionType.JUMP)
                 .setName("&2Kräftiges Gebräu der Hexenmutter").build();
 
-        k.effects.add(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 1));
         k.effects.add(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 2));
 
         addKit(k);
@@ -636,6 +637,8 @@ class KitManager {
         k.price = 15000;
         k.permission = "kitpvp.onehit";
 
+        k.maxHealth = 2;
+
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
                 "&2- Töten oder Getötet Werden ;)",
@@ -643,11 +646,10 @@ class KitManager {
 
         k.displayItem = new CItemStack(Material.BONE).setName("&4Onehit").addLore(lore).build();
 
-        k.hotbar[0] = new CItemStack(Material.BONE).setName("&7Prügelknochen").addEnchantment(Enchantment.DAMAGE_ALL, 10).build();
+        k.hotbar[0] = new CItemStack(Material.BONE).setName("&cBlutige Keule").build();
         k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.RED).addEnchantment(Enchantment.PROTECTION_FALL, 10).makeUnbreakable().build();
 
-        k.addEffect(new PotionEffect(PotionEffectType.POISON, Integer.MAX_VALUE, 10));
-        k.addEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 10));
+        k.addEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 50));
 
         addKit(k);
     }

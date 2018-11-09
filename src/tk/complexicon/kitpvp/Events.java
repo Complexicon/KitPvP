@@ -238,6 +238,7 @@ public class Events implements Listener {
                         pi.setChestplate(k.chest);
                         pi.setLeggings(k.legs);
                         pi.setBoots(k.boots);
+                        p.setMaxHealth(k.maxHealth);
                         if(!k.effects.isEmpty()){
                             for(PotionEffect eff: k.effects){
                                 p.addPotionEffect(eff);
@@ -343,6 +344,8 @@ public class Events implements Listener {
         Player killer;
 
         e.setDeathMessage(ChatColor.DARK_RED + death.getDisplayName() + "§c ist gestorben.");
+
+        death.setMaxHealth(20);
 
         cooldown.remove(death);
 
