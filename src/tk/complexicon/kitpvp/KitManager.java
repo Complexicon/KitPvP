@@ -46,6 +46,8 @@ class KitManager {
         supporter();
         oneHit();
         skeleton();
+        vampire();
+        wither();
 
         ghost();
         ender();
@@ -106,7 +108,7 @@ class KitManager {
 
         k.displayItem = new CItemStack(Material.BOW).setName("&2Archer").addLore(lore).build();
 
-        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.GREEN).makeUnbreakable().addLore(lore).build();
+        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.GREEN).makeUnbreakable().build();
         k.chest = new CItemStack(Material.CHAINMAIL_CHESTPLATE).makeUnbreakable().build();
         k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.GREEN).makeUnbreakable().build();
         k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GREEN).makeUnbreakable().build();
@@ -451,7 +453,7 @@ class KitManager {
 
         k.displayItem = new CItemStack(Material.SPIDER_EYE).addLore(lore).setName("&2Witch").build();
         k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.GRAY).makeUnbreakable().build();
-        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.GRAY).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).addEnchantment(Enchantment.THORNS, 1).build();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.GRAY).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).addEnchantment(Enchantment.THORNS, 1).build();
         k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.GRAY).makeUnbreakable().build();
         k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GRAY).makeUnbreakable().build();
 
@@ -559,7 +561,6 @@ class KitManager {
         Kit k = new Kit();
 
         k.permission = "kitpvp.barbar";
-        k.price = 2600;
 
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
@@ -648,7 +649,7 @@ class KitManager {
 
         k.displayItem = new CItemStack(Material.SPECKLED_MELON).setName("&4Onehit").addLore(lore).build();
 
-        k.hotbar[0] = new CItemStack(Material.GOLD_SWORD).setName("&6Dämmerbrecher").addEnchantment(Enchantment.DAMAGE_ALL, 10).build();
+        k.hotbar[0] = new CItemStack(Material.GOLD_SWORD).makeUnbreakable().setName("&6Dämmerbrecher").addEnchantment(Enchantment.DAMAGE_ALL, 10).build();
         k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.RED).addEnchantment(Enchantment.PROTECTION_FALL, 10).makeUnbreakable().build();
 
         k.addEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 100));
@@ -676,13 +677,76 @@ class KitManager {
 
         k.hotbar[0] = new CItemStack(Material.BONE).setName("&7Knochenkeule").addEnchantment(Enchantment.DAMAGE_ALL, 5).build();
         k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
-        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.WHITE)
+                .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
+                .addEnchantment(Enchantment.DEPTH_STRIDER, 1)
+                .makeUnbreakable().build();
         k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
-        k.helm = new CItemStack(Material.SKULL).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
+        k.helm = new CItemStack(Material.SKULL_ITEM).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
 
         k.addEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 2));
         k.addEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
         k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+
+        addKit(k);
+    }
+
+    public void vampire(){
+        Kit k = new Kit();
+
+        k.price = 5000;
+        k.permission = "kitpvp.vampire";
+
+        String[] lore = new String[]{
+                "&6Dieses Kit beinhaltet:",
+                "&2- Stab des Lebensentzugs",
+                "&2- Umhang des Vampirs",
+                "&2- 2x Frischgebraute Blutige Mara",
+                "&5- Permanent Nachtsicht"
+        };
+
+        k.displayItem = new CItemStack(Material.STICK).setName("&cVampir").addLore(lore).build();
+
+        k.hotbar[0] = new CItemStack(Material.STICK).setName("&cStab des Lebensentzugs").addEnchantment(Enchantment.DAMAGE_ALL, 1).build();
+
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.PURPLE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4).makeUnbreakable().build();
+
+        k.hotbar[8] = new CPotion().setType(PotionType.STRENGTH)
+                .addPotionEffect(PotionEffectType.REGENERATION, 30)
+                .addPotionEffect(PotionEffectType.BLINDNESS, 2)
+                .setName("&4Blutige Mara").setAmt(2).build();
+
+        k.addEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 2));
+
+        addKit(k);
+    }
+
+    public void wither(){
+        Kit k = new Kit();
+
+        k.price = 4000;
+        k.permission = "kitpvp.wither";
+
+        String[] lore = new String[]{
+                "&6Dieses Kit beinhaltet:",
+                "&2- Schwert des Withers",
+                "&2- 2x Trank der Blindheit",
+                "&5- Permanent Nachtsicht"
+        };
+
+        k.displayItem = new CItemStack(Material.SKULL_ITEM).setDurability(1).setName("&8Wither").addLore(lore).build();
+
+        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).setName("&8Wither-Schwert").makeUnbreakable().addEnchantment(Enchantment.DAMAGE_ALL, 2).build();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().build();
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.BLACK).makeUnbreakable().build();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.BLACK).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
+        k.helm = new CItemStack(Material.SKULL_ITEM).setDurability(1).makeUnbreakable().build();
+
+        k.hotbar[1] = new CPotion().setType(PotionType.STRENGTH)
+                .addPotionEffect(PotionEffectType.BLINDNESS, 2).splash()
+                .setName("&4Trank der Blindheit").setAmt(2).build();
+
+        k.addEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 2));
 
         addKit(k);
     }

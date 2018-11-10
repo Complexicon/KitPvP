@@ -5,9 +5,7 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.*;
 import org.bukkit.block.Sign;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowball;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -133,13 +131,13 @@ public class Events implements Listener {
 
     @EventHandler
     public void onSoup(PlayerInteractEvent e) {
-
-        if(e.getPlayer().getItemInHand().getType().equals(Material.MUSHROOM_SOUP)){
+        if (e.getPlayer().getItemInHand().getType().equals(Material.MUSHROOM_SOUP)){
+            Player  p = e.getPlayer();
             if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK){
-                if(e.getPlayer().getHealth() != 20){
-                    if(e.getPlayer().getHealth() + 5 <= 20){
-                        e.getPlayer().setHealth(e.getPlayer().getHealth() + 5);
-                        e.getPlayer().getItemInHand().setType(Material.BOWL);
+                if(p.getHealth() != p.getMaxHealth()){
+                    if(p.getHealth() + 5 <= p.getMaxHealth()){
+                        p.setHealth(p.getHealth() + 5);
+                        p.getItemInHand().setType(Material.BOWL);
                     }
                 }
             }
@@ -154,9 +152,46 @@ public class Events implements Listener {
                     Player shooter = (Player) ((Snowball) e.getDamager()).getShooter();
                     shooter.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20, 2));
                 }
-                if(e.getEntity() instanceof Player){
-                    Player p = (Player) e.getEntity();
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 2));
+                if(e.getEntity() instanceof LivingEntity){
+                    LivingEntity l = (LivingEntity) e.getEntity();
+                    l.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 2));
+                }
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onLifeDrain(EntityDamageByEntityEvent e) {
+
+        int healingFactor = 3;
+
+        if(!e.isCancelled()){
+            if (e.getDamager() instanceof Player) {
+                Player p = (Player) e.getDamager();
+                if(p.getItemInHand().getType() == Material.AIR || p.getItemInHand() == null) return;
+                if(p.getItemInHand().getItemMeta().getDisplayName().contains(m.trMsg("&cStab des Lebensentzugs"))){
+                    if(p.getHealth() + healingFactor > p.getMaxHealth()) p.setHealth(p.getMaxHealth());
+                    else p.setHealth(p.getHealth() + healingFactor);
+                    if(e.getEntity() instanceof Damageable){
+                        Damageable d = (Damageable) e.getEntity();
+                        if (!(d.getHealth() - (healingFactor + 1) < 0)) d.setHealth(d.getHealth() - (healingFactor + 1));
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onWither(EntityDamageByEntityEvent e) {
+        if(!e.isCancelled()){
+            if (e.getDamager() instanceof Player) {
+                Player p = (Player) e.getDamager();
+                if(p.getItemInHand().getType() == Material.AIR || p.getItemInHand() == null) return;
+                if(p.getItemInHand().getItemMeta().getDisplayName().contains(m.trMsg("&8Wither-Schwert"))){
+                    if(e.getEntity() instanceof LivingEntity){
+                        LivingEntity l = (LivingEntity) e.getEntity();
+                        l.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 1));
+                    }
                 }
             }
         }
@@ -307,6 +342,8 @@ public class Events implements Listener {
         p.getInventory().setArmorContents(new ItemStack[4]);
         p.teleport(e.getPlayer().getWorld().getSpawnLocation());
         p.setMaxHealth(20);
+        p.setExp(0F);
+        p.setLevel(0);
         p.setHealth(p.getMaxHealth());
 
         Bukkit.getScheduler().runTaskLater(m, new Runnable() {
@@ -364,14 +401,7 @@ public class Events implements Listener {
             }
         }
 
-        Bukkit.getScheduler().runTaskLater(m, new Runnable() {
-
-            @Override
-            public void run() {
-                death.spigot().respawn();
-            }
-
-        }, 20L);
+        Bukkit.getScheduler().runTaskLater(m, () -> death.spigot().respawn(), 20L);
 
         if (e.getEntity().getKiller() instanceof Player) {
             killer = e.getEntity().getKiller().getPlayer();
