@@ -32,12 +32,15 @@ import tk.complexicon.kitpvp.utils.CItemStack;
 import tk.complexicon.kitpvp.utils.CLeatherArmor;
 import tk.complexicon.kitpvp.utils.Kit;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 public class Events implements Listener {
 
-    Main m;
-    HashMap<Player, Long> cooldown = new HashMap();
+    private Main m;
+    private HashMap<Player, Long> cooldown = new HashMap<>();
 
     public Events(Main m){
         this.m = m;
@@ -80,9 +83,9 @@ public class Events implements Listener {
     @EventHandler
     public void onSignChange(SignChangeEvent e) {
         if (e.getLine(0).equalsIgnoreCase("[kitpvp]")) {
-            e.setLine(0, "§c-§bKitPvP§c-");
-            e.setLine(1, "§2Wähle dein");
-            e.setLine(2, "§c-Kit-");
+            e.setLine(0, m.trMsg("&d»&2KitPVP&d«"));
+            e.setLine(1, m.trMsg("&dWähle dein"));
+            e.setLine(2, m.trMsg("&c[Kit]"));
 
         }
     }
@@ -93,7 +96,7 @@ public class Events implements Listener {
             if (e.getClickedBlock().getState() instanceof Sign) {
                 Player p = e.getPlayer();
                 Sign s = (Sign) e.getClickedBlock().getState();
-                if (s.getLine(0).contains("§c-§bKitPvP§c-")) {
+                if (s.getLine(0).contains(m.trMsg("&d»&2KitPVP&d«"))) {
                     int multiplier = (int) Math.ceil(m.km.kitlist.size() / 9.0);
                     Inventory dummy = Bukkit.createInventory(null, 9 * multiplier, ChatColor.LIGHT_PURPLE + "Kits");
                     int x = 0;
@@ -101,7 +104,7 @@ public class Events implements Listener {
 
                         CItemStack displayItem = new CItemStack(k.displayItem.clone());
                         List<String> curLore = displayItem.getLore();
-                        List<String> statusLore = new ArrayList();
+                        List<String> statusLore = new ArrayList<>();
 
                         if(p.hasPermission(k.permission)){
                             statusLore.add(ChatColor.GREEN + "Bereits Gekauft!");
@@ -206,14 +209,14 @@ public class Events implements Listener {
                         if(!p.hasPermission("kitpvp.bypasscooldown")){
                             if(cd < 30000){
                                 int wait = (int) ((30000 - cd) / 1000);
-                                p.sendMessage("§cDu musst noch " + wait + " Sekunden Warten!");
+                                m.sendMsg(p, "&cDu musst noch " + wait + " Sekunden Warten!");
                                 return;
                             }
                             cooldown.remove(p);
                             startCooldown(p, cooldown);
                         }
 
-                        p.sendMessage("§aErfolgreich das Kit " + c.getItemMeta().getDisplayName() + " §a Ausgewählt!");
+                        m.sendMsg(p, "&aErfolgreich das Kit " + c.getItemMeta().getDisplayName() + " &a Ausgewählt!");
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 3, 1);
                         p.closeInventory();
 
@@ -270,18 +273,18 @@ public class Events implements Listener {
                                 if(econ.getBalance(p) >= k.price){
                                     econ.withdrawPlayer(p, k.price);
                                     perms.playerAdd(null, p, k.permission);
-                                    p.sendMessage("§aDu hast erfolgreich das Kit: " + c.getItemMeta().getDisplayName() + "§a gekauft. Vielen Dank!");
+                                    m.sendMsg(p, "&aDu hast erfolgreich das Kit: " + c.getItemMeta().getDisplayName() + "&a gekauft. Vielen Dank!");
                                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 0.8F);
                                     p.closeInventory();
                                     return;
                                 }else{
                                     p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1, 1);
-                                    p.sendMessage("§cDu hast nicht genug Geld für das Kit: " + c.getItemMeta().getDisplayName());
+                                    m.sendMsg(p, "&cDu hast nicht genug Geld für das Kit: " + c.getItemMeta().getDisplayName());
                                     return;
                                 }
                             }else{
                                 p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1, 1);
-                                p.sendMessage("§cDu kannst diese Kit nicht Kaufen!");
+                                m.sendMsg(p, "&cDu kannst diese Kit nicht Kaufen!");
                                 return;
                             }
 
@@ -289,7 +292,7 @@ public class Events implements Listener {
 
                         }
 
-                        p.sendMessage("§cKeine Berechtigung auf das Kit: " + c.getItemMeta().getDisplayName());
+                        m.sendMsg(p, "&cKeine Berechtigung auf das Kit: " + c.getItemMeta().getDisplayName());
                     }
                 }
             }
@@ -346,9 +349,10 @@ public class Events implements Listener {
         Player death = e.getEntity();
         Player killer;
 
-        e.setDeathMessage(ChatColor.DARK_RED + death.getDisplayName() + "§c ist gestorben.");
+        e.setDeathMessage(m.trMsg("&4" + death.getDisplayName() + "&c ist gestorben."));
 
         death.setMaxHealth(20);
+        death.setLevel(0);
 
         cooldown.remove(death);
 
@@ -372,33 +376,62 @@ public class Events implements Listener {
         if (e.getEntity().getKiller() instanceof Player) {
             killer = e.getEntity().getKiller().getPlayer();
             if(killer.getName() == death.getName()){
-                e.setDeathMessage(ChatColor.DARK_RED + death.getDisplayName() + "§c wollte nicht mehr Leben");
+                e.setDeathMessage(m.trMsg("&4" + death.getDisplayName() + "&c wollte nicht mehr Leben"));
                 return;
             }
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 4));
             killer.playSound(killer.getLocation(), Sound.LEVEL_UP, 3, 2);
-            e.setDeathMessage(ChatColor.DARK_RED + death.getDisplayName() + "§c wurde von " + ChatColor.GREEN + killer.getDisplayName() + "§c getötet!");
+            killer.setLevel(killer.getLevel() + 1);
+
+            e.setDeathMessage(m.trMsg("&4" + death.getDisplayName() + "&c wurde von &a" + killer.getDisplayName() + "&c getötet!"));
+
             if(m.economyHook){
                 Random r = new Random();
                 RegisteredServiceProvider<Economy> rsp = m.getServer().getServicesManager().getRegistration(Economy.class);
                 Economy econ = rsp.getProvider();
                 int base = 4 + r.nextInt(6);
                 int boost = 0;
+                int killstreakBonus = 0;
 
-                if(killer.hasPermission("kitpvp.coinboost.2x")){
-                    boost = 5 + r.nextInt(5);
+                switch (killer.getLevel()){
+                    case 3:{
+                        m.bcast("&a" + killer.getDisplayName() + " &6hat eine &d3er-Killstreak!");
+                        killstreakBonus = 10;
+                        m.sendMsg(killer, "&aDu erhälst einen Killstreak-Bonus von: " + killstreakBonus + "©!");
+                        break;
+                    }
+                    case 5:{
+                        m.bcast("&a" + killer.getDisplayName() + " &6hat eine &55er-Killstreak!");
+                        killstreakBonus = 30;
+                        m.sendMsg(killer, "&aDu erhälst einen Killstreak-Bonus von: " + killstreakBonus + "©!");
+                        break;
+                    }
+                    case 10:{
+                        m.bcast("&a" + killer.getDisplayName() + " &6hat eine &410er-Killstreak!");
+                        killstreakBonus = 50;
+                        m.sendMsg(killer, "&aDu erhälst einen Killstreak-Bonus von: " + killstreakBonus + "©!");
+                        break;
+                    }
+                    case 50:{
+                        m.bcast("&a" + killer.getDisplayName() + " &6hat eine &050er-Killstreak!");
+                        killstreakBonus = 2000;
+                        m.sendMsg(killer, "&aDu erhälst einen Killstreak-Bonus von: " + killstreakBonus + "©!");
+                        break;
+                    }
+                    default:
+                        break;
                 }
 
-                if(killer.hasPermission("kitpvp.coinboost.4x")){
-                    boost = 15 + r.nextInt(15);
-                }
+                if(killer.hasPermission("kitpvp.coinboost.2x")) boost = 5 + r.nextInt(5);
+
+                if(killer.hasPermission("kitpvp.coinboost.4x")) boost = 15 + r.nextInt(15);
 
                 if(boost == 0){
-                    econ.depositPlayer(killer, base);
-                    killer.sendMessage("§aDu hast: ©" + ChatColor.GOLD + "+" + base + " §aErhalten!");
+                    econ.depositPlayer(killer, base + killstreakBonus);
+                    m.sendMsg(killer, "&aDu hast: &6" + (base + killstreakBonus) + "© &aErhalten!");
                 }else{
-                    econ.depositPlayer(killer, base + boost);
-                    killer.sendMessage("§aDu hast: §6+©" + base + " §aund Boost: §b+©" + boost +" §aErhalten! §6(+©" + (base + boost) + ")");
+                    econ.depositPlayer(killer, base + boost + killstreakBonus);
+                    m.sendMsg(killer, "&aDu hast: &6+" + (base + boost + killstreakBonus) + "© &aErhalten! &d(Coinboost Aktiv!)");
                 }
 
             }

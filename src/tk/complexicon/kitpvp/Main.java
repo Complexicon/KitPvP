@@ -3,6 +3,7 @@ package tk.complexicon.kitpvp;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -77,6 +78,18 @@ public class Main extends JavaPlugin implements Listener {
         RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
         Permission perms = rsp.getProvider();
         return perms != null;
+    }
+
+    public static void bcast(String s){
+        Bukkit.broadcastMessage(trMsg(s));
+    }
+
+    public static void sendMsg(CommandSender c, String msg){
+        c.sendMessage(trMsg(msg));
+    }
+
+    public static String trMsg(String s){
+        return s.replaceAll("6", "§");
     }
 
 }

@@ -642,15 +642,46 @@ class KitManager {
 
         String[] lore = new String[]{
                 "&6Dieses Kit beinhaltet:",
-                "&2- Töten oder Getötet Werden ;)",
+                "&2- Töten oder Getötet Werden ;)"
         };
 
-        k.displayItem = new CItemStack(Material.BONE).setName("&4Onehit").addLore(lore).build();
+        k.displayItem = new CItemStack(Material.SPECKLED_MELON).setName("&4Onehit").addLore(lore).build();
 
-        k.hotbar[0] = new CItemStack(Material.BONE).setName("&cBlutige Keule").addEnchantment(Enchantment.DAMAGE_ALL, 10).build();
+        k.hotbar[0] = new CItemStack(Material.GOLD_SWORD).setName("&6Dämmerbrecher").addEnchantment(Enchantment.DAMAGE_ALL, 10).build();
         k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.RED).addEnchantment(Enchantment.PROTECTION_FALL, 10).makeUnbreakable().build();
 
         k.addEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 100));
+
+        addKit(k);
+    }
+
+    public void skeleton(){
+        Kit k = new Kit();
+
+        k.price = 3000;
+        k.permission = "kitpvp.skeleton";
+
+        k.maxHealth = 10;
+
+        String[] lore = new String[]{
+                "&6Dieses Kit beinhaltet:",
+                "&2- Knochenkeule",
+                "&2- Knochenweiße Lederrüstung",
+                "&5- Permanent Resistenz und Schnelligkeit",
+                "&c- Permanent 5 Herzen"
+        };
+
+        k.displayItem = new CItemStack(Material.BONE).setName("&7Skelett").addLore(lore).build();
+
+        k.hotbar[0] = new CItemStack(Material.BONE).setName("&7Knochenkeule").addEnchantment(Enchantment.DAMAGE_ALL, 5).build();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
+        k.boots = new CItemStack(Material.SKULL).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
+
+        k.addEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 2));
+        k.addEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
+        k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
 
         addKit(k);
     }
