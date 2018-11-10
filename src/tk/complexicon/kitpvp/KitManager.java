@@ -678,7 +678,7 @@ class KitManager {
         k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
         k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
         k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
-        k.boots = new CItemStack(Material.SKULL).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
+        k.helm = new CItemStack(Material.SKULL).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
 
         k.addEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 2));
         k.addEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
