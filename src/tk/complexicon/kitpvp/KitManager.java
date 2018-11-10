@@ -45,6 +45,7 @@ class KitManager {
         mage();
         supporter();
         oneHit();
+        skeleton();
 
         ghost();
         ender();

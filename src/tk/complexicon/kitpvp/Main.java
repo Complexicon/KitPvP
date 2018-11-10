@@ -89,7 +89,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public static String trMsg(String s){
-        return s.replaceAll("6", "§");
+        return s.replaceAll("&", "§");
     }
 
 }
