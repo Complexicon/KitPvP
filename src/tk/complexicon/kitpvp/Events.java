@@ -169,6 +169,7 @@ public class Events implements Listener {
             if (e.getDamager() instanceof Player) {
                 Player p = (Player) e.getDamager();
                 if(p.getItemInHand().getType() == Material.AIR || p.getItemInHand() == null) return;
+                if(!p.getItemInHand().getItemMeta().hasDisplayName()) return;
                 if(p.getItemInHand().getItemMeta().getDisplayName().contains(m.trMsg("&cStab des Lebensentzugs"))){
                     if(p.getHealth() + healingFactor > p.getMaxHealth()) p.setHealth(p.getMaxHealth());
                     else p.setHealth(p.getHealth() + healingFactor);
@@ -187,6 +188,7 @@ public class Events implements Listener {
             if (e.getDamager() instanceof Player) {
                 Player p = (Player) e.getDamager();
                 if(p.getItemInHand().getType() == Material.AIR || p.getItemInHand() == null) return;
+                if(!p.getItemInHand().getItemMeta().hasDisplayName()) return;
                 if(p.getItemInHand().getItemMeta().getDisplayName().contains(m.trMsg("&8Wither-Schwert"))){
                     if(e.getEntity() instanceof LivingEntity){
                         LivingEntity l = (LivingEntity) e.getEntity();
