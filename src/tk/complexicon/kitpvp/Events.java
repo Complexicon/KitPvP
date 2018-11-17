@@ -451,17 +451,17 @@ public class Events implements Listener {
                     default:
                         break;
                 }
+                String boostType = "";
+                if(killer.hasPermission("kitpvp.coinboost.2x")) boost = 5 + r.nextInt(5); boostType = "2x";
 
-                if(killer.hasPermission("kitpvp.coinboost.2x")) boost = 5 + r.nextInt(5);
-
-                if(killer.hasPermission("kitpvp.coinboost.4x")) boost = 15 + r.nextInt(15);
+                if(killer.hasPermission("kitpvp.coinboost.4x")) boost = 15 + r.nextInt(15); boostType = "4x";
 
                 if(boost == 0){
                     econ.depositPlayer(killer, base + killstreakBonus);
-                    m.sendMsg(killer, "&aDu hast: &6" + (base + killstreakBonus) + "© &aErhalten!");
+                    m.sendMsg(killer, "&aDu hast: &6" + base + "© &aErhalten!");
                 }else{
                     econ.depositPlayer(killer, base + boost + killstreakBonus);
-                    m.sendMsg(killer, "&aDu hast: &6+" + (base + boost + killstreakBonus) + "© &aErhalten! &d(Coinboost Aktiv!)");
+                    m.sendMsg(killer, "&aDu hast: &6+" + (base + boost) + "© &aErhalten! &d(" + boostType + " Coinboost Aktiv!)");
                 }
 
             }
