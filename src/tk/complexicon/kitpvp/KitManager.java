@@ -453,7 +453,9 @@ class KitManager {
 
         k.displayItem = new CItemStack(Material.SPIDER_EYE).addLore(lore).setName("&2Witch").build();
         k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.GRAY).makeUnbreakable().build();
-        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.GRAY).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).addEnchantment(Enchantment.THORNS, 1).build();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.GRAY).makeUnbreakable()
+                .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)
+                .addEnchantment(Enchantment.THORNS, 3).build();
         k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.GRAY).makeUnbreakable().build();
         k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.GRAY).makeUnbreakable().build();
 
@@ -676,16 +678,16 @@ class KitManager {
         k.displayItem = new CItemStack(Material.BONE).setName("&7Skelett").addLore(lore).build();
 
         k.hotbar[0] = new CItemStack(Material.BONE).setName("&7Knochenkeule").addEnchantment(Enchantment.DAMAGE_ALL, 5).build();
-        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3).makeUnbreakable().build();
         k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.WHITE)
-                .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
+                .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3)
                 .addEnchantment(Enchantment.DEPTH_STRIDER, 1)
                 .makeUnbreakable().build();
-        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
-        k.helm = new CItemStack(Material.SKULL_ITEM).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2).makeUnbreakable().build();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.WHITE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3).makeUnbreakable().build();
+        k.helm = new CItemStack(Material.SKULL_ITEM).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3).makeUnbreakable().build();
 
         k.addEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 2));
-        k.addEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
+        k.addEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         k.addEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
 
         addKit(k);
