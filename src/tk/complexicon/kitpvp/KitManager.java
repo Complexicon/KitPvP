@@ -16,12 +16,11 @@ import tk.complexicon.kitpvp.utils.CPotion;
 import tk.complexicon.kitpvp.utils.Kit;
 
 import java.util.ArrayList;
-import java.util.List;
 
-class KitManager {
+public class KitManager {
 
-    List<Kit> kitlist;
-    Inventory kits;
+    public ArrayList<Kit> kitlist;
+    public Inventory kits;
 
     void initKits() {
 
@@ -58,6 +57,7 @@ class KitManager {
         int x = 0;
         for (Kit k : kitlist) {
             kits.setItem(x, k.displayItem);
+            Bukkit.getLogger().info("Registered Kit: " + k.displayItem.getItemMeta().getDisplayName());
             x++;
         }
 
@@ -636,7 +636,7 @@ class KitManager {
         addKit(k);
     }
 
-    public void oneHit(){
+    private void oneHit(){
         Kit k = new Kit();
 
         k.price = 15000;
@@ -659,7 +659,7 @@ class KitManager {
         addKit(k);
     }
 
-    public void skeleton(){
+    private void skeleton(){
         Kit k = new Kit();
 
         k.price = 3000;
@@ -693,7 +693,7 @@ class KitManager {
         addKit(k);
     }
 
-    public void vampire(){
+    private void vampire(){
         Kit k = new Kit();
 
         k.price = 5000;
@@ -723,7 +723,7 @@ class KitManager {
         addKit(k);
     }
 
-    public void wither(){
+    private void wither(){
         Kit k = new Kit();
 
         k.price = 4000;
