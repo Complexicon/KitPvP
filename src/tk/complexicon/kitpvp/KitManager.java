@@ -47,6 +47,7 @@ public class KitManager {
         skeleton();
         vampire();
         wither();
+        drugaddict();
 
         ghost();
         ender();
@@ -752,5 +753,54 @@ public class KitManager {
 
         addKit(k);
     }
+
+    private void drugaddict(){
+        Kit k = new Kit();
+
+        k.price = 4000;
+        k.permission = "kitpvp.drugaddict";
+
+        String[] lore = new String[]{
+                "&6Dieses Kit beinhaltet:",
+                "&2- Zerbrochene Glasflasche",
+                "&2- Zerissene Pennerhose",
+                "&5- 5 Gramm Kokain"
+        };
+
+        k.displayItem = new CItemStack(Material.SUGAR).setName("&bDrogenjunkie").addLore(lore).build();
+
+        k.hotbar[0] = new CItemStack(Material.GLASS_BOTTLE).setName("&8Zerbrochene Flasche").makeUnbreakable().addEnchantment(Enchantment.DAMAGE_ALL, 5).build();
+
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.BLACK).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 8).build();
+
+        k.hotbar[1] = new CItemStack(Material.SUGAR).setAmt(5).setName("&7Kokain").build();
+
+        addKit(k);
+    }
+
+    /*
+    private void shadow(){
+        Kit k = new Kit();
+
+        k.buyable = false;
+        k.permission = "kitpvp.shadow";
+
+        String[] lore = new String[]{
+                "&6Dieses Kit beinhaltet:",
+                "&2- Zerbrochene Glasflasche",
+                "&2- Zerissene Pennerhose",
+                "&5- 5 Gramm Kokain"
+        };
+
+        k.displayItem = new CItemStack(Material.SUGAR).setDurability(1).setName("&bDrogenjunkie").addLore(lore).build();
+
+        k.hotbar[0] = new CItemStack(Material.GLASS_BOTTLE).setName("&8Zerbrochene Flasche").makeUnbreakable().addEnchantment(Enchantment.DAMAGE_ALL, 5).build();
+
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.BLACK).makeUnbreakable().addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 8).build();
+
+        k.hotbar[1] = new CItemStack(Material.SUGAR).setAmt(5).setName("&7Kokain").build();
+
+        addKit(k);
+    }*/
 
 }

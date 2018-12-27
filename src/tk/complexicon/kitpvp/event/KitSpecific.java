@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import tk.complexicon.kitpvp.Main;
@@ -107,8 +108,31 @@ public class KitSpecific implements Listener {
     }
 
     @EventHandler
+    public void onCocain(PlayerInteractEvent e) {
+        if (e.getPlayer().getItemInHand().getType().equals(Material.SUGAR)){
+            Player  p = e.getPlayer();
+            if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK && Utils.isNotCreative(e.getPlayer())){
+
+                PotionEffect[] effects = {
+                        new PotionEffect(PotionEffectType.SPEED, 100, 2),
+                        new PotionEffect(PotionEffectType.REGENERATION, 100, 1),
+                        new PotionEffect(PotionEffectType.CONFUSION, 140, 0)
+                };
+
+                if(p.getItemInHand().getAmount() == 1) p.setItemInHand(new ItemStack(Material.AIR));
+                else p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+
+                for(PotionEffect pot : effects){
+                    if(p.hasPotionEffect(pot.getType())) p.removePotionEffect(pot.getType());
+                    p.addPotionEffect(pot);
+                }
+            }
+        }
+    }
+
+    @EventHandler
     public void ghostSneak(PlayerToggleSneakEvent e){
-        if(e.getPlayer().hasPotionEffect(PotionEffectType.INVISIBILITY) && Utils.isNotCreative(e.getPlayer())){
+        if(e.getPlayer().hasPotionEffect(PotionEffectType.INVISIBILITY) && Utils.isNotCreative(e.getPlayer()) && m.invisible.hasEntry(e.getPlayer().getName())){
             Player p = e.getPlayer();
             if(!e.isSneaking()){
                 p.getInventory().setBoots(new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().build());
