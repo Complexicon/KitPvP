@@ -8,11 +8,14 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import tk.complexicon.kitpvp.Main;
@@ -76,15 +79,15 @@ public class KitSpecific implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDKArrow(EntityDamageByEntityEvent e) {
         if(!e.isCancelled()){
-            if (e.getDamager() instanceof Arrow && ((Arrow) e.getDamager()).getShooter() instanceof Player) {
-                ItemMeta handMeta = ((Player) ((Arrow) e.getDamager()).getShooter()).getItemInHand().getItemMeta();
-                if (handMeta.hasDisplayName() && handMeta.getDisplayName().contains("Bogen des Meisters") && e.getEntity() instanceof LivingEntity) {
-                    LivingEntity l = (LivingEntity) e.getEntity();
-                    l.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 10));
-                    l.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 1));
-                    l.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20, 1));
-                }
-            }
+            PotionEffect[] dkArrow = {
+                    new PotionEffect(PotionEffectType.SLOW, 60, 254),
+                new PotionEffect(PotionEffectType.JUMP, 60, 254),
+                new PotionEffect(PotionEffectType.BLINDNESS, 60, 1),
+                new PotionEffect(PotionEffectType.WEAKNESS, 60, 1)
+            };
+
+            arrowHit(e, "Bogen des Meisters", dkArrow);
+
         }
     }
 
@@ -124,54 +127,24 @@ public class KitSpecific implements Listener {
     }
 
     @EventHandler
-    public void onCocain(PlayerInteractEvent e) {
-        if (e.getPlayer().getItemInHand().getType().equals(Material.SUGAR)){
-            Player  p = e.getPlayer();
-            if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK && Utils.isNotCreative(e.getPlayer())){
+    public void onInstantUse(PlayerInteractEvent e) {
+        if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK && Utils.isNotCreative(e.getPlayer())){
+            PotionEffect[] dragonblood = {
+                    new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 60, 0),
+                    new PotionEffect(PotionEffectType.SPEED, 200, 0),
+                    new PotionEffect(PotionEffectType.HEALTH_BOOST, 140, 1),
+                    new PotionEffect(PotionEffectType.HEAL, 1, 10)
+            };
 
-                PotionEffect[] effects = {
-                        new PotionEffect(PotionEffectType.SPEED, 100, 2),
-                        new PotionEffect(PotionEffectType.REGENERATION, 100, 1),
-                        new PotionEffect(PotionEffectType.CONFUSION, 140, 0)
-                };
+            PotionEffect[] cocain = {
+                    new PotionEffect(PotionEffectType.SPEED, 100, 2),
+                    new PotionEffect(PotionEffectType.REGENERATION, 100, 1),
+                    new PotionEffect(PotionEffectType.CONFUSION, 140, 0)
+            };
 
-                if(p.getItemInHand().getAmount() == 1) p.setItemInHand(new ItemStack(Material.AIR));
-                else p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+            instantUse(e.getPlayer(), "Drachenblut", Material.BLAZE_POWDER, dragonblood);
+            instantUse(e.getPlayer(), "Kokain", Material.SUGAR, cocain);
 
-                for(PotionEffect pot : effects){
-                    if(p.hasPotionEffect(pot.getType())) p.removePotionEffect(pot.getType());
-                    p.addPotionEffect(pot);
-                }
-            }
-        }
-    }
-
-    @EventHandler
-    public void onDragonblood(PlayerInteractEvent e) {
-        if (e.getPlayer().getItemInHand().getType().equals(Material.BLAZE_POWDER)
-                && (e.getAction() == Action.RIGHT_CLICK_AIR
-                || e.getAction() == Action.RIGHT_CLICK_BLOCK
-                && Utils.isNotCreative(e.getPlayer()))) {
-
-            Player p = e.getPlayer();
-            ItemStack inhand = p.getItemInHand();
-
-            if(inhand.getItemMeta().hasDisplayName() && inhand.getItemMeta().getDisplayName().contains("Drachenblut")){
-                PotionEffect[] effects = {
-                        new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 60, 1),
-                        new PotionEffect(PotionEffectType.SPEED, 200, 0),
-                        new PotionEffect(PotionEffectType.REGENERATION, 80, 2),
-                        new PotionEffect(PotionEffectType.HEALTH_BOOST, 120, 1)
-                };
-
-                if (p.getItemInHand().getAmount() == 1) p.setItemInHand(new ItemStack(Material.AIR));
-                else p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
-
-                for (PotionEffect pot : effects) {
-                    if (p.hasPotionEffect(pot.getType())) p.removePotionEffect(pot.getType());
-                    p.addPotionEffect(pot);
-                }
-            }
         }
     }
 
@@ -182,6 +155,39 @@ public class KitSpecific implements Listener {
                 e.getPlayer().getInventory().setBoots(new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().build());
             }else{
                 e.getPlayer().getInventory().setBoots(null);
+            }
+        }
+    }
+
+    private void arrowHit(EntityDamageByEntityEvent e, String itemQuery, PotionEffect[] effects){
+        if (e.getDamager() instanceof Arrow && ((Arrow) e.getDamager()).getShooter() instanceof Player) {
+            for (MetadataValue val : e.getDamager().getMetadata("kSourceItem")){
+                if(val.asString().contains(itemQuery)){
+                    if(e.getEntity() instanceof LivingEntity){
+                        LivingEntity l = (LivingEntity) e.getEntity();
+                        for(PotionEffect eff : effects){
+                            l.addPotionEffect(eff);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void instantUse(Player p, String itemQuery, Material type, PotionEffect[] effects){
+        if (p.getItemInHand().getType().equals(type)) {
+
+            ItemStack inhand = p.getItemInHand();
+
+            if(inhand.getItemMeta().hasDisplayName() && inhand.getItemMeta().getDisplayName().contains(itemQuery)){
+
+                if (p.getItemInHand().getAmount() == 1) p.setItemInHand(new ItemStack(Material.AIR));
+                else p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+
+                for (PotionEffect pot : effects) {
+                    if (p.hasPotionEffect(pot.getType())) p.removePotionEffect(pot.getType());
+                    p.addPotionEffect(pot);
+                }
             }
         }
     }

@@ -809,6 +809,7 @@ public class KitManager {
         Kit k = new Kit();
 
         k.buyable = false;
+        k.dropExclusive = true;
         k.permission = "kitpvp.dk";
 
         String[] lore = new String[]{

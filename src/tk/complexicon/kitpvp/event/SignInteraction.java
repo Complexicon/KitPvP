@@ -61,6 +61,9 @@ public class SignInteraction implements Listener {
                                 statusLore.add(ChatColor.RED + "Nicht Gekauft!");
                                 statusLore.add(ChatColor.GOLD + "Preis: " + k.price);
                                 statusLore.add(ChatColor.AQUA + "Kaufe mit Rechtsklick!");
+                            } else if(k.dropExclusive){
+                                statusLore.add(ChatColor.RED + "Nicht Kaufbar!");
+                                statusLore.add(ChatColor.AQUA + "Nur als Drop Erhältlich!");
                             } else {
                                 statusLore.add(ChatColor.RED + "Nicht Kaufbar!");
                                 statusLore.add(ChatColor.LIGHT_PURPLE + "Exklusiv Für VIP!");

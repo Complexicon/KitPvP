@@ -14,6 +14,7 @@ public class Kit {
     public String permission = "kitpvp.default";
 
     public boolean buyable = true;
+    public boolean dropExclusive = false;
     public int price = 0;
     public double maxHealth = 20;
 
