@@ -52,6 +52,8 @@ public class KitManager {
         ghost();
         ender();
 
+        dk();
+
         int multiplier = (int) Math.ceil(kitlist.size() / 9.0);
 
         kits = Bukkit.createInventory(null, 9 * multiplier, ChatColor.LIGHT_PURPLE + "Kits");
@@ -802,5 +804,45 @@ public class KitManager {
 
         addKit(k);
     }*/
+
+    private void dk() {
+        Kit k = new Kit();
+
+        k.buyable = false;
+        k.permission = "kitpvp.dk";
+
+        String[] lore = new String[]{
+                "&6Dieses Kit beinhaltet:",
+                "&6- Die Drakonische Macht"
+        };
+
+        k.displayItem = new CItemStack(Material.BLAZE_POWDER).addLore(lore).setName("&6D&4r&6a&4c&6h&4e&6n&4r&6i&4t&6t&4e&6r").build();
+        k.helm = new CItemStack(Material.GOLD_HELMET)
+                .makeUnbreakable()
+                .addEnchantment(Enchantment.PROTECTION_FIRE, 1)
+                .addEnchantment(Enchantment.PROTECTION_PROJECTILE, 5)
+                .addEnchantment(Enchantment.THORNS, 2)
+                .build();
+        k.chest = new CItemStack(Material.IRON_CHESTPLATE).makeUnbreakable().build();
+        k.legs = new CItemStack(Material.CHAINMAIL_LEGGINGS).makeUnbreakable().build();
+        k.boots = new CItemStack(Material.CHAINMAIL_BOOTS).makeUnbreakable().build();
+
+        k.hotbar[0] = new CItemStack(Material.STONE_SWORD).makeUnbreakable().build();
+        k.hotbar[1] = new CItemStack(Material.BOW)
+                .makeUnbreakable()
+                .addEnchantment(Enchantment.ARROW_FIRE, 1)
+                .addEnchantment(Enchantment.ARROW_KNOCKBACK, 1)
+                .setName("&6Bogen des Meisters").build();
+        k.hotbar[2] = new CItemStack(Material.BLAZE_POWDER, 2).setName("&4Drachenblut").build();
+        k.hotbar[3] = new CPotion().setType(PotionType.FIRE_RESISTANCE)
+                .addPotionEffect(PotionEffectType.ABSORPTION,1,16)
+                .addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE,25)
+                .addPotionEffect(PotionEffectType.FIRE_RESISTANCE,16).setAmt(2).setName("&6Lavatrunk").build();
+        k.hotbar[8] = new CItemStack(Material.ARROW, 3).setName("&0Tödlicher Pfeil").build();
+
+        k.addEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
+
+        addKit(k);
+    }
 
 }

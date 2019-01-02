@@ -12,6 +12,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import tk.complexicon.kitpvp.Main;
@@ -67,6 +68,21 @@ public class KitSpecific implements Listener {
                 if(e.getEntity() instanceof LivingEntity){
                     LivingEntity l = (LivingEntity) e.getEntity();
                     l.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 2));
+                }
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onDKArrow(EntityDamageByEntityEvent e) {
+        if(!e.isCancelled()){
+            if (e.getDamager() instanceof Arrow && ((Arrow) e.getDamager()).getShooter() instanceof Player) {
+                ItemMeta handMeta = ((Player) ((Arrow) e.getDamager()).getShooter()).getItemInHand().getItemMeta();
+                if (handMeta.hasDisplayName() && handMeta.getDisplayName().contains("Bogen des Meisters") && e.getEntity() instanceof LivingEntity) {
+                    LivingEntity l = (LivingEntity) e.getEntity();
+                    l.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 10));
+                    l.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 1));
+                    l.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20, 1));
                 }
             }
         }
@@ -131,13 +147,41 @@ public class KitSpecific implements Listener {
     }
 
     @EventHandler
+    public void onDragonblood(PlayerInteractEvent e) {
+        if (e.getPlayer().getItemInHand().getType().equals(Material.BLAZE_POWDER)
+                && (e.getAction() == Action.RIGHT_CLICK_AIR
+                || e.getAction() == Action.RIGHT_CLICK_BLOCK
+                && Utils.isNotCreative(e.getPlayer()))) {
+
+            Player p = e.getPlayer();
+            ItemStack inhand = p.getItemInHand();
+
+            if(inhand.getItemMeta().hasDisplayName() && inhand.getItemMeta().getDisplayName().contains("Drachenblut")){
+                PotionEffect[] effects = {
+                        new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 60, 1),
+                        new PotionEffect(PotionEffectType.SPEED, 200, 0),
+                        new PotionEffect(PotionEffectType.REGENERATION, 80, 2),
+                        new PotionEffect(PotionEffectType.HEALTH_BOOST, 120, 1)
+                };
+
+                if (p.getItemInHand().getAmount() == 1) p.setItemInHand(new ItemStack(Material.AIR));
+                else p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+
+                for (PotionEffect pot : effects) {
+                    if (p.hasPotionEffect(pot.getType())) p.removePotionEffect(pot.getType());
+                    p.addPotionEffect(pot);
+                }
+            }
+        }
+    }
+
+    @EventHandler
     public void ghostSneak(PlayerToggleSneakEvent e){
         if(e.getPlayer().hasPotionEffect(PotionEffectType.INVISIBILITY) && Utils.isNotCreative(e.getPlayer()) && m.invisible.hasEntry(e.getPlayer().getName())){
-            Player p = e.getPlayer();
             if(!e.isSneaking()){
-                p.getInventory().setBoots(new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().build());
+                e.getPlayer().getInventory().setBoots(new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.BLACK).makeUnbreakable().build());
             }else{
-                p.getInventory().setBoots(null);
+                e.getPlayer().getInventory().setBoots(null);
             }
         }
     }
