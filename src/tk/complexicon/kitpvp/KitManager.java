@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.material.Dye;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -53,6 +54,7 @@ public class KitManager {
         ender();
 
         dk();
+        antighost();
 
         int multiplier = (int) Math.ceil(kitlist.size() / 9.0);
 
@@ -842,6 +844,30 @@ public class KitManager {
         k.hotbar[8] = new CItemStack(Material.ARROW, 3).setName("&0Tödlicher Pfeil").build();
 
         k.addEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
+
+        addKit(k);
+    }
+
+    private void antighost() {
+        Kit k = new Kit();
+
+        k.buyable = false;
+        k.dropExclusive = true;
+        k.permission = "kitpvp.antighost";
+
+        String[] lore = new String[]{
+                "&6Dieses Kit beinhaltet:",
+                "&6- Antigeist"
+        };
+
+        k.displayItem = new CItemStack(Material.GLASS).addLore(lore).setName("&7Antigeist").build();
+        k.helm = new CLeatherArmor(Material.LEATHER_HELMET).color(Color.WHITE).makeUnbreakable().build();
+        k.chest = new CLeatherArmor(Material.LEATHER_CHESTPLATE).color(Color.WHITE).makeUnbreakable().build();
+        k.legs = new CLeatherArmor(Material.LEATHER_LEGGINGS).color(Color.WHITE).makeUnbreakable().build();
+        k.boots = new CLeatherArmor(Material.LEATHER_BOOTS).color(Color.WHITE).makeUnbreakable().build();
+
+        k.hotbar[0] = new CItemStack(Material.IRON_SWORD).makeUnbreakable().build();
+        k.hotbar[1] = new CItemStack(Material.BROWN_MUSHROOM).setName("&7Geisterhafter Pilz").setAmt(4).build();
 
         addKit(k);
     }

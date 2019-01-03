@@ -1,5 +1,6 @@
 package tk.complexicon.kitpvp.event;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
@@ -80,7 +81,7 @@ public class KitSpecific implements Listener {
     public void onDKArrow(EntityDamageByEntityEvent e) {
         if(!e.isCancelled()){
             PotionEffect[] dkArrow = {
-                    new PotionEffect(PotionEffectType.SLOW, 60, 254),
+                new PotionEffect(PotionEffectType.SLOW, 60, 254),
                 new PotionEffect(PotionEffectType.JUMP, 60, 254),
                 new PotionEffect(PotionEffectType.BLINDNESS, 60, 1),
                 new PotionEffect(PotionEffectType.WEAKNESS, 60, 1)
@@ -145,6 +146,21 @@ public class KitSpecific implements Listener {
             instantUse(e.getPlayer(), "Drachenblut", Material.BLAZE_POWDER, dragonblood);
             instantUse(e.getPlayer(), "Kokain", Material.SUGAR, cocain);
 
+            if(checkInstantUse(e.getPlayer(), "Geisterhafter Pilz", Material.BROWN_MUSHROOM)){
+                for(Player online : Bukkit.getOnlinePlayers()){
+                    online.hidePlayer(e.getPlayer());
+                }
+
+                m.invisible.addEntry(e.getPlayer().getDisplayName());
+
+                Bukkit.getScheduler().runTaskLater(this.m, () -> {
+                    for(Player online : Bukkit.getOnlinePlayers()){
+                        online.showPlayer(e.getPlayer());
+                    }
+                    m.invisible.removeEntry(e.getPlayer().getDisplayName());
+                }, 300);
+
+            }
         }
     }
 
@@ -175,6 +191,15 @@ public class KitSpecific implements Listener {
     }
 
     private void instantUse(Player p, String itemQuery, Material type, PotionEffect[] effects){
+        if(checkInstantUse(p, itemQuery, type)){
+            for (PotionEffect pot : effects) {
+                if (p.hasPotionEffect(pot.getType())) p.removePotionEffect(pot.getType());
+                p.addPotionEffect(pot);
+            }
+        }
+    }
+
+    private boolean checkInstantUse(Player p, String itemQuery, Material type){
         if (p.getItemInHand().getType().equals(type)) {
 
             ItemStack inhand = p.getItemInHand();
@@ -184,12 +209,10 @@ public class KitSpecific implements Listener {
                 if (p.getItemInHand().getAmount() == 1) p.setItemInHand(new ItemStack(Material.AIR));
                 else p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
 
-                for (PotionEffect pot : effects) {
-                    if (p.hasPotionEffect(pot.getType())) p.removePotionEffect(pot.getType());
-                    p.addPotionEffect(pot);
-                }
+                return true;
             }
         }
+        return false;
     }
 
 }
