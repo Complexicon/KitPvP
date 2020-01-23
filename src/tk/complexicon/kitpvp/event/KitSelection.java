@@ -1,6 +1,7 @@
 package tk.complexicon.kitpvp.event;
 
 import com.nametagedit.plugin.NametagEdit;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -76,6 +77,11 @@ public class KitSelection implements Listener {
                         }
 
                         for (PotionEffect effect : p.getActivePotionEffects()) p.removePotionEffect(effect.getType());
+
+                        for(Player online : Bukkit.getOnlinePlayers()) online.showPlayer(p);
+
+                        p.removeMetadata("kInvisible", m);
+                        p.removeMetadata("kStayInvisible", m);
 
                         pi.setHelmet(k.helm);
                         pi.setChestplate(k.chest);

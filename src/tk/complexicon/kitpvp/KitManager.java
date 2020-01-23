@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.material.Dye;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -25,7 +24,7 @@ public class KitManager {
 
     void initKits() {
 
-        kitlist = new ArrayList();
+        kitlist = new ArrayList<>();
 
         swordsman();
         barbar();

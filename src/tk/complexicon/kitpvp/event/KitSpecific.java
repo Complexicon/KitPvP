@@ -9,12 +9,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
@@ -153,12 +151,30 @@ public class KitSpecific implements Listener {
 
                 m.invisible.addEntry(e.getPlayer().getDisplayName());
 
-                Bukkit.getScheduler().runTaskLater(this.m, () -> {
-                    for(Player online : Bukkit.getOnlinePlayers()){
-                        online.showPlayer(e.getPlayer());
+                for(MetadataValue  meta : e.getPlayer().getMetadata("kInvisible")){
+                    if(meta.asBoolean()){
+                        e.getPlayer().setMetadata("kStayInvisible",new FixedMetadataValue(m, true));
                     }
-                    m.invisible.removeEntry(e.getPlayer().getDisplayName());
+                }
+
+                Bukkit.getScheduler().runTaskLater(this.m, () -> {
+                    boolean stayInvisible = false;
+
+                    for(MetadataValue  meta : e.getPlayer().getMetadata("kStayInvisible")) stayInvisible = meta.asBoolean();
+
+                    if(!stayInvisible){
+                        for(Player online : Bukkit.getOnlinePlayers()){
+                            online.showPlayer(e.getPlayer());
+                        }
+                        m.invisible.removeEntry(e.getPlayer().getDisplayName());
+                        e.getPlayer().removeMetadata("kInvisible", m);
+                    }
+
+                    e.getPlayer().removeMetadata("kStayInvisible", m);
+
                 }, 300);
+
+                e.getPlayer().setMetadata("kInvisible",new FixedMetadataValue(m, true));
 
             }
         }
