@@ -1,6 +1,6 @@
 name: KitPvP
-main: tk.complexicon.kitpvp.Main
-version: 1.0-Dev
+main: tk.cmplx.kitpvp.Main
+version: 1.2-Dev
 commands:
    reloadkits:
       description: Reloads Kits.
