@@ -1,4 +1,4 @@
-package tk.complexicon.kitpvp;
+package tk.cmplx.kitpvp;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,10 +10,10 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
-import tk.complexicon.kitpvp.utils.CItemStack;
-import tk.complexicon.kitpvp.utils.CLeatherArmor;
-import tk.complexicon.kitpvp.utils.CPotion;
-import tk.complexicon.kitpvp.utils.Kit;
+import tk.cmplx.kitpvp.utils.CItemStack;
+import tk.cmplx.kitpvp.utils.CLeatherArmor;
+import tk.cmplx.kitpvp.utils.CPotion;
+import tk.cmplx.kitpvp.utils.Kit;
 
 import java.util.ArrayList;
 

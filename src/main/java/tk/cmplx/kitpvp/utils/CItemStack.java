@@ -1,4 +1,4 @@
-package tk.complexicon.kitpvp.utils;
+package tk.cmplx.kitpvp.utils;
 
 
 import org.bukkit.Material;
@@ -50,7 +50,7 @@ public class CItemStack {
 
     public CItemStack addLore(String[] lore){
 
-        List<String> loreList = new ArrayList();
+        List<String> loreList = new ArrayList<String>();
 
         for(String s : lore){
             loreList.add(s.replace("&", "§"));

@@ -1,4 +1,4 @@
-package tk.complexicon.kitpvp.event;
+package tk.cmplx.kitpvp.event;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -17,9 +17,9 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import tk.complexicon.kitpvp.Main;
-import tk.complexicon.kitpvp.utils.CLeatherArmor;
-import tk.complexicon.kitpvp.utils.Utils;
+import tk.cmplx.kitpvp.Main;
+import tk.cmplx.kitpvp.utils.CLeatherArmor;
+import tk.cmplx.kitpvp.utils.Utils;
 
 public class KitSpecific implements Listener {
 

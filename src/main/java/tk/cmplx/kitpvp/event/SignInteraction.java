@@ -1,4 +1,4 @@
-package tk.complexicon.kitpvp.event;
+package tk.cmplx.kitpvp.event;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,10 +10,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
-import tk.complexicon.kitpvp.Main;
-import tk.complexicon.kitpvp.utils.CItemStack;
-import tk.complexicon.kitpvp.utils.Kit;
-import tk.complexicon.kitpvp.utils.Utils;
+import tk.cmplx.kitpvp.Main;
+import tk.cmplx.kitpvp.utils.CItemStack;
+import tk.cmplx.kitpvp.utils.Kit;
+import tk.cmplx.kitpvp.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

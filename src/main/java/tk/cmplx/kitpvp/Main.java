@@ -1,4 +1,4 @@
-package tk.complexicon.kitpvp;
+package tk.cmplx.kitpvp;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -11,7 +11,7 @@ import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
-import tk.complexicon.kitpvp.event.*;
+import tk.cmplx.kitpvp.event.*;
 
 import java.util.HashMap;
 import java.util.logging.Logger;

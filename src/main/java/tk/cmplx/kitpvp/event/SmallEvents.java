@@ -1,4 +1,4 @@
-package tk.complexicon.kitpvp.event;
+package tk.cmplx.kitpvp.event;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -15,8 +15,8 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
-import tk.complexicon.kitpvp.Main;
-import tk.complexicon.kitpvp.utils.Utils;
+import tk.cmplx.kitpvp.Main;
+import tk.cmplx.kitpvp.utils.Utils;
 
 public class SmallEvents implements Listener {
 

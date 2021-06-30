@@ -1,4 +1,4 @@
-package tk.complexicon.kitpvp.utils;
+package tk.cmplx.kitpvp.utils;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -27,9 +27,9 @@ public class Kit {
 
     public ItemStack[] hotbar = {air, air, air, air, air, air, air, air, air};
 
-    public List<ItemStack> extra = new ArrayList();
+    public List<ItemStack> extra = new ArrayList<ItemStack>();
 
-    public List<PotionEffect> effects = new ArrayList();
+    public List<PotionEffect> effects = new ArrayList<PotionEffect>();
 
     public void multiStack(ItemStack stack, int amount) {
         for (int x = 0; x < amount; x++) {

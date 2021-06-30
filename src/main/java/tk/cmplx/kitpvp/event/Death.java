@@ -1,4 +1,4 @@
-package tk.complexicon.kitpvp.event;
+package tk.cmplx.kitpvp.event;
 
 import com.nametagedit.plugin.NametagEdit;
 import org.bukkit.Bukkit;
@@ -9,8 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import tk.complexicon.kitpvp.Main;
-import tk.complexicon.kitpvp.utils.Utils;
+import tk.cmplx.kitpvp.Main;
+import tk.cmplx.kitpvp.utils.Utils;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package tk.complexicon.kitpvp.utils;
+package tk.cmplx.kitpvp.utils;
 
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -12,7 +12,7 @@ public class CLeatherArmor extends CItemStack {
 
     LeatherArmorMeta lMeta;
 
-    List<Material> leather = new ArrayList();
+    List<Material> leather = new ArrayList<Material>();
 
     public CLeatherArmor(Material mat){
         super(mat);

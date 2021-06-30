@@ -1,4 +1,4 @@
-package tk.complexicon.kitpvp.utils;
+package tk.cmplx.kitpvp.utils;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
