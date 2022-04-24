@@ -43,6 +43,10 @@
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
 		</repository>
+		<repository>
+			<id>upstream</id>
+			<url>https://ci.nametagedit.com/plugin/repository/everything/</url>
+		</repository>
     </repositories>
 
     <dependencies>
@@ -66,9 +70,9 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.github.sgtcaze</groupId>
-			<artifactId>Nametagedit</artifactId>
-			<version>master-SNAPSHOT</version>
+			<groupId>com.nametagedit</groupId>
+			<artifactId>nametagedit</artifactId>
+			<version>4.4.16</version>
 		</dependency>
     </dependencies>
 </project>
