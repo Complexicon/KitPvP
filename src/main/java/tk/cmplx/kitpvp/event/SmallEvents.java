@@ -5,8 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -14,17 +14,15 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
+
 import tk.cmplx.kitpvp.Main;
+import tk.cmplx.kitpvp.utils.Log;
 import tk.cmplx.kitpvp.utils.Utils;
 
 public class SmallEvents implements Listener {
 
-    private Main m;
-
-    public SmallEvents(Main m){
-        this.m = m;
-        m.l.info("Registered Small Events!");
+    public SmallEvents(){
+        Log.info("Registered Small Events!");
     }
 
     @EventHandler
@@ -49,7 +47,7 @@ public class SmallEvents implements Listener {
         p.teleport(e.getPlayer().getWorld().getSpawnLocation());
         p.setHealth(p.getMaxHealth());
 
-        Bukkit.getScheduler().runTaskLater(m, () -> {
+        Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
             e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
             e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }, 5);
@@ -72,10 +70,8 @@ public class SmallEvents implements Listener {
     }
 
     @EventHandler
-    public  void onBowShoot(EntityShootBowEvent e){
-        if(e.getBow().getItemMeta().hasDisplayName()){
-            e.getProjectile().setMetadata("kSourceItem", new FixedMetadataValue(this.m, e.getBow().getItemMeta().getDisplayName()));
-        }
+    public void onProjectileHit(ProjectileHitEvent e) {
+        e.getEntity().remove();
     }
 
     private void clearPlayer(Player p){
@@ -85,7 +81,6 @@ public class SmallEvents implements Listener {
         p.setExp(0F);
         p.setLevel(0);
         p.setMaxHealth(20);
-        m.invisible.removeEntry(p.getDisplayName());
     }
 
 }
