@@ -42,7 +42,11 @@ public class KitManager {
 			new Ghost(),
 			new Ender(),
 
-			new Dragonknight()
+			new Jesus(),
+			new Hunter(),
+			new Dragonknight(),
+
+			new David(),
 	};
 
 	public static void openKitSelection(Player p) {

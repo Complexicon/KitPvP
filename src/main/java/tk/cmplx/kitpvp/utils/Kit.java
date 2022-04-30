@@ -6,8 +6,10 @@ import java.util.List;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
@@ -99,5 +101,7 @@ public abstract class Kit {
 	public void onDamageDeal(EntityDamageByEntityEvent event, Player dealer, Player receiver) {}
 	public void onDamageReceive(EntityDamageByEntityEvent event, Player dealer, Player receiver) {}
 	public void onSneak(PlayerToggleSneakEvent event, Player player) {}
+	public void onBlockPlace(BlockPlaceEvent event, Player player) {}
+	public void onItemDrop(PlayerDropItemEvent event, ItemStack item, Player player) {}
 
 }

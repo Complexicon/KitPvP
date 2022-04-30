@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.metadata.Metadatable;
 
 import tk.cmplx.kitpvp.Main;
 
@@ -37,11 +38,11 @@ public class Utils {
 		return false;
 	}
 
-	public static void putMetadata(Player player, String key, Object value) {
+	public static void putMetadata(Metadatable player, String key, Object value) {
 		player.setMetadata(key, new FixedMetadataValue(Main.instance, value));
 	}
 
-	public static <T> T getMetadata(Player player, String key, Class<T> target) {
+	public static <T> T getMetadata(Metadatable player, String key, Class<T> target) {
 		List<MetadataValue> metaList = player.getMetadata(key);
 
 		for(MetadataValue v : metaList) {
