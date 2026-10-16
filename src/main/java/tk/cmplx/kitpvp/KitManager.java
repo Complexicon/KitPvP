@@ -11,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 import net.md_5.bungee.api.ChatColor;
 import tk.cmplx.kitpvp.kits.*;
 import tk.cmplx.kitpvp.utils.CItemStack;
+import tk.cmplx.kitpvp.utils.EconomyHelper;
 import tk.cmplx.kitpvp.utils.Kit;
 
 public class KitManager {
@@ -46,6 +47,11 @@ public class KitManager {
 			new Hunter(),
 			new Dragonknight(),
 
+			new Shadow(),
+			new OITC(),
+
+			new Rengar(),
+
 			new David(),
 	};
 
@@ -59,7 +65,7 @@ public class KitManager {
 			List<String> lore = new ArrayList<>(Arrays.asList(k.lore));
 
 			if (!p.hasPermission(k.permission)) {
-				if (Main.economyHook && Main.permissionHook) {
+				if (EconomyHelper.economy() && EconomyHelper.permissions()) {
 					if (k.buyable) {
 						lore.add(0, ChatColor.RED + "Nicht Gekauft!");
 						lore.add(0, ChatColor.GOLD + "Preis: " + k.price);

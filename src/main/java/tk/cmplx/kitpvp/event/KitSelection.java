@@ -1,6 +1,5 @@
 package tk.cmplx.kitpvp.event;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -13,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 import tk.cmplx.kitpvp.KitManager;
-import tk.cmplx.kitpvp.Main;
+import tk.cmplx.kitpvp.utils.EconomyHelper;
 import tk.cmplx.kitpvp.utils.Kit;
 import tk.cmplx.kitpvp.utils.Log;
 import tk.cmplx.kitpvp.utils.Utils;
@@ -31,8 +30,10 @@ public class KitSelection implements Listener {
 		ItemStack c = e.getCurrentItem();
 		Inventory i = e.getInventory();
 
-		if (c == null || c.getType() == Material.AIR) return;
-		if (!i.getName().contains(ChatColor.LIGHT_PURPLE + "Kits")) return;
+		if (c == null || c.getType() == Material.AIR)
+			return;
+		if (!i.getName().contains(ChatColor.LIGHT_PURPLE + "Kits"))
+			return;
 
 		e.setCancelled(true);
 
@@ -56,39 +57,13 @@ public class KitSelection implements Listener {
 
 			k.applyKit(p);
 			Utils.putMetadata(p, "kitpvp.lastSelected", System.currentTimeMillis());
-
-			for (Player online : Bukkit.getOnlinePlayers())
-				online.showPlayer(p);
+			Utils.show(p);
 
 		} else {
-
-			if (e.getClick() == ClickType.RIGHT) {
-				if (Main.economyHook && Main.permissionHook) {
-					if (k.buyable) {
-						if (Main.instance.econ.getBalance(p) >= k.price) {
-
-							Main.instance.econ.withdrawPlayer(p, k.price);
-							Main.instance.perms.playerAdd(null, p, k.permission);
-
-							Utils.msg(p, "&aDu hast erfolgreich das Kit: " + c.getItemMeta().getDisplayName()
-									+ "&a gekauft. Vielen Dank!");
-
-							p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 0.8F);
-							p.closeInventory();
-							return;
-						} else {
-							p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1, 1);
-							Utils.msg(p, "&cDu hast nicht genug Geld für das Kit: " + c.getItemMeta().getDisplayName());
-							return;
-						}
-					} else {
-						p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1, 1);
-						Utils.msg(p, "&cDu kannst diese Kit nicht Kaufen!");
-						return;
-					}
-				}
-			}
-			Utils.msg(p, "&cKeine Berechtigung auf das Kit: " + c.getItemMeta().getDisplayName());
+			if (e.getClick() == ClickType.RIGHT && EconomyHelper.economy() && EconomyHelper.permissions())
+				EconomyHelper.buyKit(p, k);
+			else
+				Utils.msg(p, "&cKeine Berechtigung auf das Kit: " + c.getItemMeta().getDisplayName());
 		}
 
 	}

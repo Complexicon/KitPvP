@@ -9,8 +9,13 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
+import org.bukkit.entity.Wolf;
+import org.bukkit.entity.Horse.Variant;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -148,6 +153,12 @@ public class David extends Kit {
 			tnt.setFuseTicks(30);
 			Utils.putMetadata(tnt, "placer", player);
 		}
+	}
+
+	@Override
+	public void onKitSelected(Player p) {
+		//Creeper h = p.getWorld().spawn(p.getLocation(), Creeper.class);
+		
 	}
 
 }

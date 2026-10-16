@@ -42,6 +42,21 @@ public class Utils {
 		player.setMetadata(key, new FixedMetadataValue(Main.instance, value));
 	}
 
+	public static boolean hide(Player p) {
+		if(getMetadata(p, "kitpvp.hidden", Boolean.class) != null) return false;
+		putMetadata(p, "kitpvp.hidden", true);
+        Bukkit.getOnlinePlayers().forEach(p2 -> p2.hidePlayer(p));
+		return true;
+
+	}
+
+	public static boolean show(Player p) {
+		if(getMetadata(p, "kitpvp.hidden", Boolean.class) == null) return false;
+		p.removeMetadata("kitpvp.hidden", Main.instance);
+		Bukkit.getOnlinePlayers().forEach(p2 -> p2.showPlayer(p));
+		return false;
+	}
+
 	public static <T> T getMetadata(Metadatable player, String key, Class<T> target) {
 		List<MetadataValue> metaList = player.getMetadata(key);
 

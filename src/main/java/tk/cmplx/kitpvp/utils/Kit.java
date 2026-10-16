@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -88,13 +89,14 @@ public abstract class Kit {
 			p.addPotionEffect(eff);
 
 		p.setHealth(p.getMaxHealth());
-
+		onKitSelected(p);
 	}
 
 	public static Kit getKit(Player player) {
 		return Utils.getMetadata(player, "kitpvp.kit", Kit.class);
 	}
 
+	public void onKitSelected(Player player) {}
 	public void onProjectileHit(ProjectileHitEvent event, Player player) {}
 	public void onInteract(PlayerInteractEvent event, Player player) {}
 	public void onItemUse(PlayerInteractEvent event, Player player, ItemStack item) {}
@@ -103,5 +105,7 @@ public abstract class Kit {
 	public void onSneak(PlayerToggleSneakEvent event, Player player) {}
 	public void onBlockPlace(BlockPlaceEvent event, Player player) {}
 	public void onItemDrop(PlayerDropItemEvent event, ItemStack item, Player player) {}
+	public void onKill(Player player) {}
+	public void onItemHeld(PlayerItemHeldEvent event, Player player) {}
 
 }

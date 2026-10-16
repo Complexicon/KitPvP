@@ -24,6 +24,11 @@ public class CItemStack {
         this.meta = i.getItemMeta();
     }
 
+    public CItemStack addFlag(ItemFlag f) {
+        meta.addItemFlags(f);
+        return this;
+    }
+
     public CItemStack(Material m, ItemMeta meta){
         this.i = new ItemStack(m);
         this.meta = meta;

@@ -6,18 +6,17 @@ import java.util.List;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
@@ -145,6 +144,14 @@ public class KitSpecific implements Listener {
 	// 	newent.setVelocity(e.getProjectile().getVelocity());
 	// 	e.setProjectile(newent);
 	// }
+
+	@EventHandler
+	public void onHeldItemChange(PlayerItemHeldEvent e) {
+		Kit playerKit = Kit.getKit(e.getPlayer());
+
+		if(playerKit != null)
+			playerKit.onItemHeld(e, e.getPlayer());
+	}
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent e){

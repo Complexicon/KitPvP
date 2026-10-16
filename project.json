@@ -1,0 +1,14 @@
+{
+    "name": "KitPvP",
+    "minecraftVersion": "1.8.8",
+    "mvnRepos": [
+		"https://jitpack.io"
+	],
+    "dependencies": [
+		{
+			"groupID": "com.github.MilkBowl",
+			"artifact": "VaultAPI",
+			"version": "1.7"
+		}
+	]
+}
